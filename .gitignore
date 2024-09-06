@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij,visualstudiocode,macos,windows,linux,angular
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij,visualstudiocode,macos,windows,linux,angular
 
+## Spring ##
+/backend/src/main/resources/application.properties
+
 ### Angular ###
 ## Angular ##
 # compiled output
