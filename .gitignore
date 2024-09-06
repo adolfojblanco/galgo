@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij,visualstudiocode,macos,windows,linux,angular
 
 ## Spring ##
-/backend/src/main/resources/application.properties
+./backend/src/main/resources/application.properties
 
 ### Angular ###
 ## Angular ##
