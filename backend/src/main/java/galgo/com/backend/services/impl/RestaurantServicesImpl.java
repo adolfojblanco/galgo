@@ -1,5 +1,6 @@
 package galgo.com.backend.services.impl;
 
+import galgo.com.backend.dto.RestaurantDTO;
 import galgo.com.backend.models.Restaurant;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.services.IRestaurantService;
@@ -17,22 +18,37 @@ public class RestaurantServicesImpl implements IRestaurantService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Restaurant> findAll() {
+    public List<RestaurantDTO> findAll() {
         return restaurantRepository.findAll();
     }
 
     @Override
-    public Optional<Restaurant> findById(Long id) {
-        return restaurantRepository.findById(id);
+    public Optional<RestaurantDTO> findOneById(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId);
     }
 
     @Override
-    public Restaurant save(Restaurant restaurant) {
+    public Restaurant save(RestaurantDTO restaurant) {
+        return null;
+    }
+
+    @Override
+    public Restaurant save(RestaurantDTO restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
     @Override
-    public void deleteById(Long id) {
-        restaurantRepository.deleteById(id);
+    public void deleteById(Long restaurantId) {
+        restaurantRepository.deleteById(restaurantId);
+    }
+
+    @Override
+    public Restaurant updateOneById(RestaurantDTO restaurantDTO) {
+        return null;
+    }
+
+    @Override
+    public Restaurant disableOneById(Long restaurantId) {
+        return null;
     }
 }
