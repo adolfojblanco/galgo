@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "restaurants")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -27,10 +29,15 @@ public class Restaurant {
     private String manager;
 
     @NotNull(message = "mobileNumber field should not be null")
+    private String localPhone;
+
+    @NotNull(message = "mobileNumber field should not be null")
     private String mobilePhone;
 
     @NotNull(message = "Address should not be null")
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+
+    private boolean active;
 
 }
