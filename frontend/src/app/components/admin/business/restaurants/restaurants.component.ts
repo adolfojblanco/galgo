@@ -3,6 +3,7 @@ import { Restaurant } from '../../../../models/Restaurant';
 import { RestaurantService } from '../../../../services/restaurant.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RestaurantDialogComponent } from './restaurant-dialog/restaurant-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurants',
@@ -11,10 +12,11 @@ import { RestaurantDialogComponent } from './restaurant-dialog/restaurant-dialog
 })
 export class RestaurantsComponent implements OnInit {
   private restaurantServices = inject(RestaurantService);
+  private router = inject(Router);
   private dialog = inject(MatDialog);
   public restaurants!: Restaurant[];
   public dataSource = this.restaurants;
-  public displayedColumns: string[] = ['name', 'category', 'price', 'is_active', 'has_stock', 'actions'];
+  public displayedColumns: string[] = ['restaurantName', 'manager', 'mobilePhone', 'localPhone', 'enabled', 'actions'];
 
 
   ngOnInit(): void {
@@ -22,8 +24,14 @@ export class RestaurantsComponent implements OnInit {
   }
 
   loadRestaurants(): void {
-    this.restaurantServices.getAllRestaurants().subscribe(res => { this.dataSource = res, console.log(res) })
+    this.restaurantServices.getAllRestaurants().subscribe(res => { this.dataSource = res })
   }
+
+  restaurantDetails(restaurant: Restaurant) {
+    this.router.navigate([`/admin/business/restaurants/details/`, restaurant.restaurantId]);
+  }
+
+
 
   newRestaurant() {
     const dialogRef = this.dialog.open(RestaurantDialogComponent, {

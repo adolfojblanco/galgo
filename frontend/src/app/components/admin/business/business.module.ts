@@ -7,13 +7,15 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestaurantDialogComponent } from './restaurants/restaurant-dialog/restaurant-dialog.component';
+import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
 
 
 @NgModule({
   declarations: [
     BusinessComponent,
     RestaurantsComponent,
-    RestaurantDialogComponent
+    RestaurantDialogComponent,
+    RestaurantDetailsComponent
   ],
   imports: [
     CommonModule,

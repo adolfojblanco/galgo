@@ -13,7 +13,29 @@ export class RestaurantService {
   private http = inject(HttpClient);
   constructor() { }
 
+  /**
+   * Get All restaurant
+   * @returns
+   */
   getAllRestaurants(): Observable<Restaurant[]> {
     return this.http.get<Restaurant[]>(`${this.urlEndPoint}`);
+  }
+
+  /**
+   * Create a restaurant
+   * @param restaurant
+   * @returns
+   */
+  createRestaurant(restaurant: Restaurant): Observable<Restaurant> {
+    return this.http.post<Restaurant>(`${this.urlEndPoint}`, restaurant);
+  }
+
+  /**
+   * Search restaurant for id
+   * @param id
+   * @returns
+   */
+  findOneById(id: number): Observable<Restaurant> {
+    return this.http.get<Restaurant>(`${this.urlEndPoint}/${id}`);
   }
 }

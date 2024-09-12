@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface IRestaurantService {
 
-    public List<RestaurantDTO> findAll();
+    List<Restaurant> findAll();
 
-    public Optional<RestaurantDTO> findOneById(Long restaurantId);
+    Optional<Restaurant> findOneById(Long restaurantId);
 
-    public Restaurant save(RestaurantDTO restaurant);
+    Restaurant save(Restaurant restaurant);
 
-    public void deleteById(Long restaurantId);
+    void deleteById(Long restaurantId);
 
-    public Restaurant updateOneById(RestaurantDTO restaurantDTO);
+    Restaurant updateOneById(Long restaurantId, Restaurant restaurantDTO);
 
-    public Restaurant disableOneById(Long restaurantId);
+    Restaurant disableOneById(Long restaurantId);
 }

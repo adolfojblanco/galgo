@@ -10,14 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
 @RequestMapping("/api/restaurants")
-@CrossOrigin(origins = { "http://localhost:4200" })
 public class RestaurantController {
 
     @Autowired
@@ -25,17 +22,16 @@ public class RestaurantController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<RestaurantDTO> getAll(){
+    public List<Restaurant> getAll(){
         return this.restaurantService.findAll();
     };
 
     /**
      * find by id
      */
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{restaurantId}")
     public ResponseEntity<?> getOneById(@PathVariable Long restaurantId){
-        Optional<RestaurantDTO> restaurant = this.restaurantService.findOneById(restaurantId);
+        Optional<Restaurant> restaurant = this.restaurantService.findOneById(restaurantId);
         if (restaurant.isPresent()){
             return ResponseEntity.ok(restaurant.get());
         }
@@ -47,7 +43,7 @@ public class RestaurantController {
      * Save restaurant
      */
     @PostMapping
-    public ResponseEntity<Restaurant> create(@RequestBody @Valid RestaurantDTO restaurant) {
+    public ResponseEntity<?> create(@RequestBody @Valid Restaurant restaurant) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 
@@ -56,15 +52,15 @@ public class RestaurantController {
      */
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<Restaurant> updateOneById(@PathVariable Long restaurantId, @RequestBody @Valid RestaurantDTO restaurantDTO){
-        Restaurant restaurant = restaurantService.updateOneById(restaurantDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.save(restaurantDTO));
+    public ResponseEntity<Restaurant> updateOneById(@PathVariable Long restaurantId, @RequestBody @Valid Restaurant restaurant){
+        Restaurant rest = restaurantService.updateOneById(restaurantId, restaurant);
+        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.save(rest));
     }
 
-    @PutMapping("/{restaurantId/disabled}")
-    public ResponseEntity<Restaurant> disableOneById(@PathVariable Long restaurantId){
+    @PutMapping("/{restaurantId}/disabled")
+    public ResponseEntity<RestaurantDTO> disableOneById(@PathVariable Long restaurantId){
         Restaurant restaurant = restaurantService.disableOneById(restaurantId);
-        return ResponseEntity.status(HttpStatus.OK).body(restaurant);
+        return null;
     }
 
 

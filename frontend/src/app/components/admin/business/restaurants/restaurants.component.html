@@ -20,31 +20,36 @@
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef><strong>Producto</strong></th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <ng-container matColumnDef="restaurantName">
+        <th mat-header-cell *matHeaderCellDef>
+          <strong>Nombre del Restaurante:</strong>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.restaurantName }}</td>
       </ng-container>
 
       <!-- Category Column -->
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
-          <strong>Categoria</strong>
-        </th>
-        <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
-          {{ element.category.name }}
-        </td>
+      <ng-container matColumnDef="manager">
+        <th mat-header-cell *matHeaderCellDef><strong>Encargado:</strong></th>
+        <td mat-cell *matCellDef="let element">{{ element.restaurantName }}</td>
       </ng-container>
 
       <!-- Price Column -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef><strong>Precio</strong></th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.price | currency : "EUR" }}
-        </td>
+      <ng-container matColumnDef="mobilePhone">
+        <th mat-header-cell *matHeaderCellDef>
+          <strong>Número Móvil:</strong>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.mobilePhone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="localPhone">
+        <th mat-header-cell *matHeaderCellDef>
+          <strong>Número Fijo:</strong>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.mobilePhone }}</td>
       </ng-container>
 
       <!-- Active Column -->
-      <ng-container matColumnDef="is_active">
+      <ng-container matColumnDef="enabled">
         <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
           <strong>Activo</strong>
         </th>
@@ -58,28 +63,16 @@
         </td>
       </ng-container>
 
-      <!-- Has stock column -->
-      <ng-container matColumnDef="has_stock">
-        <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
-          <strong>Stock</strong>
-        </th>
-        <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
-          <mat-icon *ngIf="element.has_stock" class="text-success"
-            >done</mat-icon
-          >
-          <mat-icon *ngIf="!element.has_stock" class="text-danger"
-            >block</mat-icon
-          >
-        </td>
-      </ng-container>
-
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef class="text-center">
           <strong>Acciones</strong>
         </th>
         <td mat-cell *matCellDef="let element" class="text-center">
-          <a mat-raised-button color="primary"
+          <a
+            mat-raised-button
+            color="primary"
+            (click)="restaurantDetails(element)"
             >Detalle<mat-icon>info</mat-icon></a
           >
         </td>

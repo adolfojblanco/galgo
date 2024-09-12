@@ -2,7 +2,7 @@ import { Adrress } from "./Address";
 
 export interface Restaurant {
 
-  id?: number,
+  restaurantId?: number,
   restaurantName: string;
   manager: string,
   mobilePhone: string;

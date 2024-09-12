@@ -1,6 +1,7 @@
 package galgo.com.backend.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurantId;
 
+    @Column(unique=true)
     @NotNull(message = "Restaurant Name should not be null")
     @Size(min = 3,max=30,message = "Restaurant name of min length should be 3 and max be 30")
     private String restaurantName;
@@ -32,13 +34,13 @@ public class Restaurant {
     private String localPhone;
 
     @NotNull(message = "mobileNumber field should not be null")
+    @NotBlank
     private String mobilePhone;
 
-    @NotNull(message = "Address should not be null")
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @NotNull
-    private boolean active;
+    private boolean enabled;
 
 }

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -15,5 +18,22 @@ import { Component } from '@angular/core';
   ]
 })
 export class LoginComponent {
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private toast = inject(HotToastService);
 
+
+  public loginForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
+
+
+  login() {
+    this.authService
+      .login(this.loginForm.value)
+      .subscribe((res) => {
+        console.log(res)
+      });
+  }
 }

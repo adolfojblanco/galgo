@@ -26,11 +26,11 @@
             type="text"
             matInput
             placeholder="Encargado:"
-            formControlName="restaurantName"
+            formControlName="manager"
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('restaurantName')">
+          <mat-hint *ngIf="isValid('manager')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>
@@ -47,7 +47,7 @@
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('restaurantName')">
+          <mat-hint *ngIf="isValid('mobilePhone')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>
@@ -64,15 +64,15 @@
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('restaurantName')">
+          <mat-hint *ngIf="isValid('localPhone')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>
       </p>
 
-      <p>
+      <!-- <p>
         <mat-slide-toggle formControlName="is_active">Activo</mat-slide-toggle>
-      </p>
+      </p> -->
     </form>
     <mat-divider></mat-divider>
   </mat-dialog-content>

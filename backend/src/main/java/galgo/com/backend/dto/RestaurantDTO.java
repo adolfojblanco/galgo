@@ -24,4 +24,6 @@ public class RestaurantDTO implements Serializable {
 
     private Address address;
 
+    private boolean enabled;
+
 }

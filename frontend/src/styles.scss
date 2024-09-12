@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "@ngneat/hot-toast/src/styles/styles";
+
+$base-color: #0e99cd;
 
 html,
 body {
@@ -38,4 +43,16 @@ h1 {
 
 .hidden {
   display: none;
+}
+
+.mat-toolbar.mat-primary {
+  --mat-toolbar-container-background-color: #0e99cd;
+  --mat-toolbar-container-text-color: white;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: #0e99cd;
+  --mdc-protected-button-label-text-color: white;
+  --mat-protected-button-state-layer-color: white;
+  --mat-protected-button-ripple-color: rgba(255, 255, 255, 0.1);
 }

@@ -1,8 +1,8 @@
 <div class="row mx-auto">
   <img
-    src="../../../../assets/img/otreze.png"
+    src="../../../../assets/img/galgo.png"
     alt="logo"
-    class="logo mx-auto mt-"
+    class="logo mx-auto mt-4"
   />
 </div>
 
@@ -11,7 +11,7 @@
     <mat-card-title class="text-center p-3">
       <h1>Inicio de Sesión</h1>
     </mat-card-title>
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <input
@@ -38,8 +38,8 @@
         <button
           type="submit"
           mat-raised-button
-          color="primary"
           class="my-3 full-width"
+          [disabled]="loginForm.invalid"
         >
           Entrar
         </button>
