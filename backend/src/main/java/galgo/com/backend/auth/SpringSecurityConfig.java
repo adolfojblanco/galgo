@@ -44,8 +44,17 @@ public class SpringSecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/api/restaurants", "/api/restaurants/**","/api/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/restaurants","/api/users").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/restaurants",
+                                "/api/restaurants/**",
+                                "/api/users",
+                                "/api/address"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.POST,
+                                "/api/restaurants",
+                                "/api/users",
+                                "/api/address"
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))

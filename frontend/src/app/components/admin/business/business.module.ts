@@ -8,6 +8,7 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestaurantDialogComponent } from './restaurants/restaurant-dialog/restaurant-dialog.component';
 import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
+import { AddressDialogComponent } from './address/address-dialog/address-dialog.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RestaurantDetailsComponent } from './restaurants/restaurant-details/res
     BusinessComponent,
     RestaurantsComponent,
     RestaurantDialogComponent,
-    RestaurantDetailsComponent
+    RestaurantDetailsComponent,
+    AddressDialogComponent
   ],
   imports: [
     CommonModule,

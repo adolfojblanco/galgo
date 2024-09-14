@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RestaurantServicesImpl implements IRestaurantService {
+public class RestaurantServiceImpl implements IRestaurantService {
 
     @Autowired private RestaurantRepository restaurantRepository;
 

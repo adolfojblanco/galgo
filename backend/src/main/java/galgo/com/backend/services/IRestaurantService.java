@@ -1,6 +1,5 @@
 package galgo.com.backend.services;
 
-import galgo.com.backend.dto.RestaurantDTO;
 import galgo.com.backend.models.Restaurant;
 
 import java.util.List;

@@ -1,11 +1,12 @@
-export interface Adrress {
+export interface Address {
   addressId?: number
   name: string
   buildingNumber: string
   floorNumber: string
   doorNumber: string
-  streetNumber: string
+  street: string
   area: string
+  postalCode: number
   city: string
   state: string
   country: string

@@ -31,8 +31,7 @@ export class RestaurantsComponent implements OnInit {
     this.router.navigate([`/admin/business/restaurants/details/`, restaurant.restaurantId]);
   }
 
-
-
+  // Create new restaurant
   newRestaurant() {
     const dialogRef = this.dialog.open(RestaurantDialogComponent, {
       width: '450px',
@@ -43,6 +42,8 @@ export class RestaurantsComponent implements OnInit {
       }
     });
   }
+
+  
 
 
 

@@ -54,11 +54,15 @@ public class RestaurantController {
     @PutMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> updateOneById(@PathVariable Long restaurantId, @RequestBody @Valid Restaurant restaurant){
         Restaurant rest = restaurantService.updateOneById(restaurantId, restaurant);
-        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.save(rest));
+        return ResponseEntity.status(HttpStatus.OK).body(rest);
     }
 
+    /**
+     * Disabled restaurant or enabled
+     * @param restaurantId
+     */
     @PutMapping("/{restaurantId}/disabled")
-    public ResponseEntity<RestaurantDTO> disableOneById(@PathVariable Long restaurantId){
+    public ResponseEntity<Restaurant> disableOneById(@PathVariable Long restaurantId){
         Restaurant restaurant = restaurantService.disableOneById(restaurantId);
         return null;
     }

@@ -1,13 +1,35 @@
 <div
-  class="d-flex justify-content-between animate__animated animate__fadeIn mb-3"
+  class="d-flex flex-row justify-content-between animate__animated animate__fadeIn mb-3"
 >
-  <button
-    mat-raised-button
-    color="secundary"
-    routerLink="/admin/business/restaurants"
-  >
-    Volver<mat-icon>arrow_back</mat-icon>
-  </button>
+  <div class="col-4">
+    <button
+      mat-raised-button
+      color="secundary"
+      routerLink="/admin/business/restaurants"
+    >
+      Volver<mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <div class="col-8">
+    <div class="d-flex justify-content-end gap-2">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/admin/business/restaurants"
+      >
+        Activar<mat-icon>power_settings_new</mat-icon>
+      </button>
+      <button
+        class="flex-md-shrink-3"
+        mat-raised-button
+        color="primary"
+        (click)="newAddress()"
+      >
+        Agregar Dirección<mat-icon>location_on</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -17,12 +39,9 @@
         <img
           src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
           alt="avatar"
-          class="rounded-circle img-fluid"
+          class="rounded-circle img-fluid mb-4"
           style="width: 150px"
         />
-        <h5 class="my-3">John Smith</h5>
-        <p class="text-muted mb-1">Full Stack Developer</p>
-        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
         <div class="d-flex justify-content-center mb-2">
           <button
             type="button"
@@ -44,6 +63,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-lg-8">
     <div class="card mb-4">
       <div class="card-body">
@@ -52,7 +72,7 @@
             <p class="mb-0">Nombre del Restaurante:</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">Johnatan Smith</p>
+            <p class="text-muted mb-0">{{ restaurant!.restaurantName }}</p>
           </div>
         </div>
         <hr />
@@ -61,7 +81,7 @@
             <p class="mb-0">Email:</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">exampleexample.com</p>
+            <p class="text-muted mb-0">{{ restaurant.email }}</p>
           </div>
         </div>
         <hr />
@@ -70,7 +90,7 @@
             <p class="mb-0">Télefono Movil:</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">(097) 234-5678</p>
+            <p class="text-muted mb-0">{{ restaurant.mobilePhone }}</p>
           </div>
         </div>
         <hr />
@@ -79,7 +99,7 @@
             <p class="mb-0">Télefono Fijo:</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">(098) 765-4321</p>
+            <p class="text-muted mb-0">{{ restaurant.localPhone }}</p>
           </div>
         </div>
         <hr />
@@ -88,7 +108,82 @@
             <p class="mb-0">Encargado:</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+            <p class="text-muted mb-0">{{ restaurant.manager }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Direccion (Google maps) -->
+  <div class="col-lg-4">
+    <div class="card mb-4">
+      <h2 class="text-center mt-4">Ubicacíon</h2>
+      <hr />
+      <div class="card-body text-center">
+        <div class="d-flex justify-content-center mb-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11604.482970957025!2d-8.481806822492176!3d43.35395055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7d74c7c55063%3A0xf60b718bf6e063e1!2sMega%20Museo%20Estrella%20Galicia!5e0!3m2!1ses!2ses!4v1726146612325!5m2!1ses!2ses"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Detalles de la ubicación:-->
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h2 class="mb-0">Detalles de la Dirección:</h2>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Calle:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ restaurant.address?.street }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Número:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">
+              {{ restaurant.address?.buildingNumber }}
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Piso / Puerta Número:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ restaurant.address?.floorNumber }} | {{restaurant.address?.doorNumber}}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Zona / País:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">
+              {{ restaurant.address?.area }} | {{ restaurant.address?.country }}
+            </p>
           </div>
         </div>
       </div>

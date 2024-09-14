@@ -30,17 +30,21 @@ public class Restaurant {
     @Size(min = 3,max=30,message = "name of min length should be 3 and max be 30")
     private String manager;
 
-    @NotNull(message = "mobileNumber field should not be null")
+    @NotNull(message = "local phone field should not be null")
     private String localPhone;
 
     @NotNull(message = "mobileNumber field should not be null")
     @NotBlank
     private String mobilePhone;
 
+    @NotNull(message = "email field should not be null")
+    private String email;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @NotNull
     private boolean enabled;
+
 
 }

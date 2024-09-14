@@ -1,0 +1,209 @@
+<h2 mat-dialog-title>{{ formTitle }}</h2>
+<mat-divider></mat-divider>
+<div class="col-12">
+  <mat-dialog-content class="mat-typography">
+    <form autocomplete="off" class="row" [formGroup]="addressForm">
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Nombre:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Nombre"
+            formControlName="name"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('name')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <!-- street -->
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Calle:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Nombre"
+            formControlName="street"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('street')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <!-- building door & postal code-->
+      <div class="d-md-flex justify-content-md-between">
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Portal:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Portal"
+            formControlName="buildingNumber"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('buildingNumber')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Cod. Postal:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Cod. Postal"
+            formControlName="postalCode"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('longitude')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <!-- floor & door -->
+      <div class="d-md-flex justify-content-md-between">
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Piso:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Numero de Piso"
+            formControlName="floorNumber"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('floorNumber')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Puerta:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Numero de Puerta"
+            formControlName="doorNumber"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('doorNumber')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <!-- area & city-->
+      <div class="d-md-flex justify-content-md-between">
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Zona:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Zona"
+            formControlName="area"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('area')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Ciudad:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Ciudad"
+            formControlName="city"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('city')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <!-- Country-->
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>País:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="País"
+            formControlName="country"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('street')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <!-- area & city-->
+      <div class="d-md-flex justify-content-md-between">
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Latitud:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Latitud"
+            formControlName="latitude"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('latitude')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="d-block col-md-5">
+          <mat-label>Longitud:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Longitud"
+            formControlName="longitude"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('longitude')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <!-- <p>
+        <mat-slide-toggle formControlName="is_active">Activo</mat-slide-toggle>
+      </p> -->
+    </form>
+    <mat-divider></mat-divider>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="addressForm.invalid"
+      [mat-dialog-close]="true"
+      (click)="submit()"
+    >
+      {{ textButton }}
+    </button>
+  </mat-dialog-actions>
+</div>

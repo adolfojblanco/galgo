@@ -25,9 +25,11 @@ public class Address {
 
     private String doorNumber;
 
-    private String streetNumber;
+    private String street;
 
     private String area;
+
+    private String postalCode;
 
     private String city;
 
