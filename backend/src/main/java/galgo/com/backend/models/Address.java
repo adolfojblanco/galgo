@@ -17,8 +17,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
 
-    private String name;
-
     private String buildingNumber;
 
     private String floorNumber;
@@ -42,6 +40,4 @@ public class Address {
     private String longitude;
 
     private boolean active;
-
-
 }

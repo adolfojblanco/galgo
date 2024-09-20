@@ -26,7 +26,6 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public Address save(Address address) {
         Address addressNew = new Address();
-        addressNew.setName(address.getName());
         addressNew.setStreet(address.getStreet());
         addressNew.setBuildingNumber(address.getBuildingNumber());
         addressNew.setPostalCode(address.getPostalCode());
@@ -52,7 +51,6 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public Address updateOneById(Long addressId, Address address) {
         Address addressBd = addressRepository.findById(addressId).orElseThrow();
-        addressBd.setName(address.getName());
         addressBd.setStreet(address.getStreet());
         addressBd.setBuildingNumber(address.getBuildingNumber());
         addressBd.setPostalCode(address.getPostalCode());

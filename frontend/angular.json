@@ -17,6 +17,9 @@
         },
         "@schematics/angular:pipe": {
           "standalone": false
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -41,6 +44,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/animate.css/animate.min.css",
+              "./node_modules/leaflet/dist/leaflet.css",
               "./src/styles.scss"
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]

@@ -15,4 +15,10 @@ public class Constant {
     public static final String USER_ALREADY_EXISTS ="USER_ALREADY_EXISTS";
     public static final String USER_CONSTRAINT_VIOLATION ="USER_CONSTRAINT_VIOLATION";
     public static final String UNKNOWN_ERROR ="UNKNOWN_ERROR";
+
+    //Common error
+    public static final String ID_NOT_EXISTS ="ID_NOT_EXISTS";
+    public static final String UNAUTHORIZED_USER ="UNAUTHORIZED_USER";
+    public static final String SIGNATURE_NOT_PENDING ="SIGNATURE_NOT_PENDING";
+    public static final String DATABASE_QUERY_ERROR ="DATABASE_QUERY_ERROR";
 }

@@ -1,6 +1,5 @@
 export interface Address {
   addressId?: number
-  name: string
   buildingNumber: string
   floorNumber: string
   doorNumber: string
@@ -12,5 +11,5 @@ export interface Address {
   country: string
   latitude?: string
   longitude?: string
-  active: string
+  aenabled: boolean
 }

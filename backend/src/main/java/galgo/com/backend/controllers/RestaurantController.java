@@ -1,13 +1,14 @@
 package galgo.com.backend.controllers;
 
-
-import galgo.com.backend.dto.RestaurantDTO;
+import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
+import galgo.com.backend.services.IAddressService;
 import galgo.com.backend.services.IRestaurantService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -19,6 +20,9 @@ public class RestaurantController {
 
     @Autowired
     private IRestaurantService restaurantService;
+
+    @Autowired
+    private IAddressService addressService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -43,7 +47,7 @@ public class RestaurantController {
      * Save restaurant
      */
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Valid Restaurant restaurant) {
+    public ResponseEntity<?> create(@Valid @RequestBody Restaurant restaurant, BindingResult result) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 
@@ -52,7 +56,7 @@ public class RestaurantController {
      */
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<Restaurant> updateOneById(@PathVariable Long restaurantId, @RequestBody @Valid Restaurant restaurant){
+    public ResponseEntity<Restaurant> updateOneById(@PathVariable Long restaurantId, @RequestBody Restaurant restaurant){
         Restaurant rest = restaurantService.updateOneById(restaurantId, restaurant);
         return ResponseEntity.status(HttpStatus.OK).body(rest);
     }
@@ -61,10 +65,23 @@ public class RestaurantController {
      * Disabled restaurant or enabled
      * @param restaurantId
      */
-    @PutMapping("/{restaurantId}/disabled")
-    public ResponseEntity<Restaurant> disableOneById(@PathVariable Long restaurantId){
+    @PutMapping("/{restaurantId}/activate")
+    public ResponseEntity<?> disableOneById(@PathVariable Long restaurantId){
+        System.out.println(restaurantId);
         Restaurant restaurant = restaurantService.disableOneById(restaurantId);
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(restaurant);
+    }
+
+    /**
+     * Add address to restaurant
+     * @param restaurantId
+     * @param address
+     * @return restaurant
+     */
+    @PutMapping("/{restaurantId}/add-address")
+    public ResponseEntity<?> addAddress(@PathVariable Long restaurantId, @RequestBody @Valid Address address){
+        Address newAddress =  addressService.save(address);
+        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.addAddress(restaurantId, newAddress));
     }
 
 

@@ -2,9 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { User } from '../models/User';
 import { Observable, tap } from 'rxjs';
-import { HotToastService } from '@ngneat/hot-toast';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Injectable({
   providedIn: 'root'

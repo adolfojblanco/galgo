@@ -196,13 +196,7 @@
 
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="addressForm.invalid"
-      [mat-dialog-close]="true"
-      (click)="submit()"
-    >
+    <button mat-raised-button color="primary" (click)="submit()">
       {{ textButton }}
     </button>
   </mat-dialog-actions>

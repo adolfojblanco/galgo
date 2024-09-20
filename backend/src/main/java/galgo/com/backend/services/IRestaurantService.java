@@ -1,5 +1,6 @@
 package galgo.com.backend.services;
 
+import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface IRestaurantService {
     Restaurant updateOneById(Long restaurantId, Restaurant restaurantDTO);
 
     Restaurant disableOneById(Long restaurantId);
+
+    Restaurant addAddress(Long restaurantId, Address address);
 }

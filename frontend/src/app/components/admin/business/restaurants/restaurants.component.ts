@@ -14,8 +14,11 @@ export class RestaurantsComponent implements OnInit {
   private restaurantServices = inject(RestaurantService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
+
+
   public restaurants!: Restaurant[];
   public dataSource = this.restaurants;
+  
   public displayedColumns: string[] = ['restaurantName', 'manager', 'mobilePhone', 'localPhone', 'enabled', 'actions'];
 
 
@@ -24,7 +27,7 @@ export class RestaurantsComponent implements OnInit {
   }
 
   loadRestaurants(): void {
-    this.restaurantServices.getAllRestaurants().subscribe(res => { this.dataSource = res })
+    this.restaurantServices.getAllRestaurants().subscribe(res => { this.dataSource = res, console.log(res) })
   }
 
   restaurantDetails(restaurant: Restaurant) {
@@ -37,13 +40,11 @@ export class RestaurantsComponent implements OnInit {
       width: '450px',
     })
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadRestaurants()
-      }
+      console.log(result)
     });
   }
 
-  
+
 
 
 

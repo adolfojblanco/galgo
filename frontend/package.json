@@ -22,6 +22,7 @@
     "@angular/router": "^18.2.4",
     "@ngneat/overview": "^6.0.0",
     "@ngxpert/hot-toast": "^3.0.1",
+    "@types/leaflet": "^1.9.12",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4",

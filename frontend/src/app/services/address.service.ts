@@ -20,11 +20,8 @@ export class AddressService {
     return this.http.post<Address>(`${this.urlEndPoint}`, address);
   }
 
-
-
-
-
-
-
+  editAddress(address: Address): Observable<Address> {
+    return this.http.put<Address>(`${this.urlEndPoint}/${address.addressId}`, address)
+  }
 
 }

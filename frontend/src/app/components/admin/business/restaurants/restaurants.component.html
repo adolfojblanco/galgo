@@ -10,6 +10,7 @@
   </button>
 </div>
 <mat-divider class="mb-3"></mat-divider>
+
 <mat-card class="mx-auto animate__animated animate__fadeIn">
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -84,6 +85,7 @@
     <mat-divider class="m-2"></mat-divider>
     <mat-paginator
       showFirstLastButtons
+      mat-dialog-close="restaurant"
       aria-label="Select page of periodic elements"
       class="mt-3"
     >

@@ -1,9 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@use "../node_modules/@ngxpert/hot-toast/src/styles/styles.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
-@use 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
-@use '@ngxpert/hot-toast/src/styles/styles.scss';
 
 $base-color: #0e99cd;
 
@@ -19,6 +18,11 @@ body {
 
 h1 {
   font-size: 1rem;
+}
+
+#map {
+  height: 30vh;
+  width: 100vh;
 }
 
 .spacer {

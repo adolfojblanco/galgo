@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class AddressController {
 
 
     /**
-     * Save address
+     * Create one address
      */
     @PostMapping
     public ResponseEntity<?> createOne(@RequestBody @Valid Address address){
