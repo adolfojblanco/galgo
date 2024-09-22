@@ -24,7 +24,7 @@ export class RestaurantDetailsComponent implements OnInit {
   private map: any;
   private marker?: L.Marker<any> | undefined;
 
-  public address!: Address | undefined;
+  public address!: Address;
   public restaurant!: Restaurant;
 
 
@@ -89,10 +89,12 @@ export class RestaurantDetailsComponent implements OnInit {
 
   activateRestaurant(restaurant: Restaurant) {
     console.log(restaurant)
-    this.restaurantService.activateRestaurant(restaurant.restaurantId!).subscribe((res) => {
-      this.toast.show(`${this.restaurant.restaurantName}, se activo correctamente`, {
-        icon: '👏',
-      });
+    this.restaurantService.activateRestaurant(restaurant.restaurantId!).subscribe((res:any) => {
+      if (res.error) {
+        this.toast.error(`${res.error}`)
+        return;
+      }
+      this.toast.success(`Se activo correctamente, ${res.restaurantName}`)
     })
   }
 

@@ -15,7 +15,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("/api/restaurants")
+@RequestMapping("/restaurants")
 public class RestaurantController {
 
     @Autowired
@@ -62,14 +62,21 @@ public class RestaurantController {
     }
 
     /**
-     * Disabled restaurant or enabled
+     * Disabled restaurant or enabled, have an address
+     *
      * @param restaurantId
      */
     @PutMapping("/{restaurantId}/activate")
-    public ResponseEntity<?> disableOneById(@PathVariable Long restaurantId){
-        System.out.println(restaurantId);
-        Restaurant restaurant = restaurantService.disableOneById(restaurantId);
-        return ResponseEntity.status(HttpStatus.OK).body(restaurant);
+    public ResponseEntity<?> disableOneById(@PathVariable Long restaurantId) {
+        Optional<Restaurant> restaurant = restaurantService.findOneById(restaurantId);
+        if (restaurant.isPresent()) {
+            if (restaurant.get().getAddress() != null) {
+                restaurantService.disableOneById(restaurantId);
+                return ResponseEntity.status(HttpStatus.OK).body(restaurant);
+            }
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(Collections.singletonMap("error", "No se puede activar, debes añadir una dirección"));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Error", "Restaurant not found"));
     }
 
     /**

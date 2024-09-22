@@ -1,4 +1,4 @@
-package galgo.com.backend.services;
+package galgo.com.backend.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendEmail {
+
+
 
 
     @Autowired
@@ -24,6 +26,7 @@ public class SendEmail {
     public void newAccount(String to) {
 
         SimpleMailMessage email = new SimpleMailMessage();
+        email.setFrom("info@adolfob.com");
         email.setTo(to);
         email.setSubject("ALTA DE USUARIO");
         email.setText("Bienvenido");

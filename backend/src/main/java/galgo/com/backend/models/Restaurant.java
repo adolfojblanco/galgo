@@ -41,7 +41,7 @@ public class Restaurant {
     @Column(unique = true)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private RestaurantType restaurantType;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -52,11 +52,10 @@ export class RestaurantService {
 
   /** activate or deactivate a restaurant */
   activateRestaurant(id: Number): Observable<Restaurant> {
-    console.log(id)
     return this.http.put<Restaurant>(`${this.urlEndPoint}/${id}/activate`, id);
   }
 
-  
+
   restaurantTypes() {
 
   }

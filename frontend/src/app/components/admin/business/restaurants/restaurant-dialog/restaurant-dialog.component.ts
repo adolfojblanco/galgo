@@ -5,6 +5,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RestaurantType } from '../../../../../models/RestaurantType';
 import { RestaurantTypesService } from '../../../../../services/restaurant-types.service';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-restaurant-dialog',
@@ -52,15 +53,19 @@ export class RestaurantDialogComponent implements OnInit {
     if (this.restaurantForm.controls['restaurantId'].value) {
       // Edit restaurant
     } else {
-
-      console.log(this.restaurantForm.value)
       // Create a restaurant
-      this.restaurantService.createRestaurant(this.restaurantForm.value).subscribe((res) => {
-        this.toast.success(`${this.restaurantForm.controls['restaurantName'].value}, registrado correctamente`)
+      this.restaurantService.createRestaurant(this.restaurantForm.value).pipe(
+        this.toast.observe(
+          {
+            loading: 'Guardando...',
+            success: (s) => 'Guardado correctamente',
+          }
+        ),
+        catchError((error) => of(error))
+      ).subscribe((res) => {
         this.dialogRef.close();
       });
     }
-
   }
 
   isValid(field: string) {
@@ -69,4 +74,5 @@ export class RestaurantDialogComponent implements OnInit {
       this.restaurantForm.controls[field].touched
     );
   }
+
 }

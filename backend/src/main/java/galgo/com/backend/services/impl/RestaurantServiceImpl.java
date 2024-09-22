@@ -6,7 +6,7 @@ import galgo.com.backend.models.RestaurantType;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
 import galgo.com.backend.services.IRestaurantService;
-import galgo.com.backend.services.SendEmail;
+import galgo.com.backend.utilities.SendEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
         RestaurantType type = restaurantTypeRepository.findById(restaurant.getRestaurantType().getId()).orElseThrow();
         rest.setRestaurantType(type);
+        Restaurant newRest = restaurantRepository.save(rest);
         this.sendEmail.newAccount(restaurant.getEmail());
-        return restaurantRepository.save(rest);
+        return newRest;
     }
 
     @Override
@@ -68,12 +69,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     public Restaurant disableOneById(Long restaurantId) {
-        log.info("Iniciamos la desactiavacion");
         Restaurant rest = restaurantRepository.findById(restaurantId).orElseThrow(null);
-        log.info("Tenemos el restaurant" + rest.getRestaurantName());
         rest.setEnabled(!rest.isEnabled());
-        log.info("Tenemos el restaurant y esta" + rest.isEnabled());
         return restaurantRepository.save(rest);
+
     }
 
     @Override
