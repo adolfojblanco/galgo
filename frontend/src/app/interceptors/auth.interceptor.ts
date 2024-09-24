@@ -36,9 +36,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       if (err.status === 500) {
-        const errorMsg = err.error.error.split('\'');
         if (err.error.message.includes("DATABASE_QUERY_ERROR")) {
+          const errorMsg = err.error.error.split('\'');
           toast.error(`Campo duplicado: ${errorMsg[1]}`)
+        }else{
+          toast.error(`${err.error.message}`)
         }
       }
 

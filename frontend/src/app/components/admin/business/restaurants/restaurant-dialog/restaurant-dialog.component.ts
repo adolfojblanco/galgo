@@ -25,14 +25,16 @@ export class RestaurantDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<RestaurantDialogComponent>) { }
 
-  public restaurantForm: FormGroup = this.fb.group({
+  restaurantForm: FormGroup = this.fb.group({
     restaurantId: [''],
     restaurantName: ['Villano', Validators.required],
-    manager: ['Alejandro Blanco', [Validators.required]],
-    email: ['alse@gmail.com', [Validators.email]],
     mobilePhone: ['567567567', [Validators.required, Validators.minLength(9)]],
     localPhone: ['567567567', [Validators.required, Validators.minLength(9)]],
-    restaurantType: [, [Validators.required]]
+    restaurantType: [, [Validators.required]],
+    username: ['alebla'],
+    firstName: ['Alejandro', [Validators.required]],
+    lastName: ['Blanco', [Validators.required]],
+    email: ['alse@gmail.com', [Validators.email]],
   })
 
   ngOnInit(): void {
@@ -53,6 +55,7 @@ export class RestaurantDialogComponent implements OnInit {
     if (this.restaurantForm.controls['restaurantId'].value) {
       // Edit restaurant
     } else {
+      console.log(this.restaurantForm.value)
       // Create a restaurant
       this.restaurantService.createRestaurant(this.restaurantForm.value).pipe(
         this.toast.observe(

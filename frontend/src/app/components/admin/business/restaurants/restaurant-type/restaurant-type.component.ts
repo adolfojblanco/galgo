@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { RestaurantTypesService } from '../../../../../services/restaurant-types.service';
 
 @Component({
   selector: 'app-restaurant-type',
@@ -11,14 +12,21 @@ export class RestaurantTypeComponent {
   private toast = inject(HotToastService);
   private fb = inject(FormBuilder)
 
+  private restTypesServices = inject(RestaurantTypesService);
+
   public titleForm = 'Nueva Categoria'
   public textButton = 'Guardar'
 
   typeForm: FormGroup = this.fb.group({
-    name: [],
+    name: ['', [Validators.required, Validators.min(3)]],
   })
 
-  submit(){}
+  submit() {
+    this.restTypesServices.createType(this.typeForm.value).subscribe((res) => {
+      this.typeForm.reset()
+      this.toast.success(`Registrado correctamente`)
+    })
+  }
 
 
   isValid(field: string) {

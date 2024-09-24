@@ -1,142 +1,158 @@
 <h2 mat-dialog-title>{{ titleForm }}</h2>
 
 <mat-divider></mat-divider>
+  <div class="col-12">
+    <mat-dialog-content class="mat-typography">
+      <form class="row" [formGroup]="restaurantForm">
+        <!-- restaurant name -->
+        <p>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Nombre del restaurante:</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Nombre del restaurante"
+              formControlName="restaurantName"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('restaurantName')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </p>
 
-<div class="col-12">
-  <mat-dialog-content class="mat-typography">
-    <form autocomplete="off" class="row" [formGroup]="restaurantForm">
-      <!-- restaurant name -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Nombre del restaurante:</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Nombre del restaurante"
-            formControlName="restaurantName"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('restaurantName')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+        <!-- mobile phone -->
+        <p class="d-flex">
+          <!-- mobile phone -->
+          <mat-form-field class="col-6" appearance="fill">
+            <mat-label>Télefono Movil:</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Télefono Movil:"
+              formControlName="mobilePhone"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('mobilePhone')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
 
-      <!-- manager first name -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Nombres del Encargado</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Encargado:"
-            formControlName="manager"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('manager')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+          <!-- movil phone -->
+          <mat-form-field class="col-6 mx-1" appearance="fill">
+            <mat-label>Télefono Fijo:</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Télefono Fijo:"
+              formControlName="localPhone"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('localPhone')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </p>
 
-      <!-- manager lastname -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Apellidos del Encargado</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Encargado:"
-            formControlName="manager"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('manager')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+        <!-- restaurant category -->
+        <p>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tipo de Comida</mat-label>
+            <mat-select formControlName="restaurantType">
+              <mat-option *ngFor="let type of restaurantType" [value]="type">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
 
-      <!-- restaurant email -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Email</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Correo Electronico:"
-            formControlName="email"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('email')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+        <!-- manager first name -->
+        <p class="d-flex">
+          <mat-form-field class="col-6" appearance="fill">
+            <mat-label>Nombres del Encargado</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Nombres:"
+              formControlName="firstName"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('firstName')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
 
-      <!-- mobile phone -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Télefono Movil:</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Télefono Movil:"
-            formControlName="mobilePhone"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('mobilePhone')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+          <!-- manager lastname -->
+          <mat-form-field class="col-6 mx-1" appearance="fill">
+            <mat-label>Apellidos del Encargado</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Apellidos:"
+              formControlName="lastName"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('lastName')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </p>
 
-      <!-- local phone -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Télefono Fijo:</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Télefono Fijo:"
-            formControlName="localPhone"
-            class="full-width"
-            required
-          />
-          <mat-hint *ngIf="isValid('localPhone')">
-            El campo es requerido <strong>Requerido</strong>
-          </mat-hint>
-        </mat-form-field>
-      </p>
+        <!-- restaurant email -->
+        <p>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Correo Electronico:"
+              formControlName="email"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('email')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </p>
 
-      <!-- restaurant category -->
-      <p>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Tipo de Comida</mat-label>
-          <mat-select formControlName="restaurantType">
-            <mat-option *ngFor="let type of restaurantType" [value]="type">
-              {{ type.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </p>
-    </form>
-    <mat-divider></mat-divider>
-  </mat-dialog-content>
+        <!-- username -->
+        <p>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Usuario</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Nombre de Usuario:"
+              formControlName="username"
+              class="full-width"
+              required
+            />
+            <mat-hint *ngIf="isValid('username')">
+              El campo es requerido <strong>Requerido</strong>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+      </form>
 
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="restaurantForm.invalid"
-      (click)="submit()"
-    >
-      {{ textButton }}
-    </button>
-  </mat-dialog-actions>
+      <mat-divider></mat-divider>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="restaurantForm.invalid"
+        (click)="submit()"
+      >
+        {{ textButton }}
+      </button>
+    </mat-dialog-actions>
+
 </div>

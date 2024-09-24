@@ -44,12 +44,13 @@ public class SpringSecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET,
-                                "/api/restaurants/**",
+                                "/api/restaurants",
                                 "/api/users",
                                 "/api/address"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST,
                                 "/api/restaurants/**",
+                                "/api/restaurants",
                                 "/api/users",
                                 "/api/address"
                         ).permitAll()

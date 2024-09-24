@@ -22,8 +22,9 @@ export class AddressDialogComponent {
   public formTitle: string = 'Dirección';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Restaurant, private dialogRef: MatDialogRef<AddressDialogComponent>) {
+    console.log(data)
     if (data.address) {
-      this.addressForm.reset(data)
+      this.addressForm.reset(data.address)
       this.textButton = 'Edición'
     }
 
@@ -32,17 +33,17 @@ export class AddressDialogComponent {
   /** Address Form */
   public addressForm: FormGroup = this.fb.group({
     addressId: [],
-    name: ['Principal', [Validators.required]],
-    street: ['Pz Manuel', [Validators.required]],
-    buildingNumber: ['1', [Validators.required]],
-    postalCode: ['15140', [Validators.required, Validators.min(4)]],
-    floorNumber: ['1', [Validators.required]],
-    doorNumber: ['2', [Validators.required]],
-    area: ['Oseriro', [Validators.required]],
-    city: ['Arteixo', [Validators.required]],
-    country: ['España', [Validators.required]],
-    latitude: ['qwqw', [Validators.required]],
-    longitude: ['qwqwq', [Validators.required]],
+    name: ['', [Validators.required]],
+    street: ['', [Validators.required]],
+    buildingNumber: ['', [Validators.required]],
+    postalCode: ['', [Validators.required, Validators.min(4)]],
+    floorNumber: ['', [Validators.required]],
+    doorNumber: ['', [Validators.required]],
+    area: ['', [Validators.required]],
+    city: ['', [Validators.required]],
+    country: ['', [Validators.required]],
+    latitude: ['', [Validators.required]],
+    longitude: ['', [Validators.required]],
     active: [],
   })
 

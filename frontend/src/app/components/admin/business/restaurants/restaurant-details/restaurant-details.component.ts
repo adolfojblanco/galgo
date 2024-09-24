@@ -25,7 +25,11 @@ export class RestaurantDetailsComponent implements OnInit {
   private marker?: L.Marker<any> | undefined;
 
   public address!: Address;
-  public restaurant!: Restaurant;
+  public restaurant: Restaurant = {
+    restaurantName: '',
+    mobilePhone: '',
+    localPhone: '',
+  };
 
 
   ngOnInit(): void {
@@ -77,13 +81,14 @@ export class RestaurantDetailsComponent implements OnInit {
    * Edit address
    */
   editAddress() {
+    console.log(this.address)
     const dialogRef = this.dialog.open(AddressDialogComponent, {
       width: '650px',
       data: this.address
     })
-    dialogRef.afterClosed().subscribe((result) => {
+    // dialogRef.afterClosed().subscribe((result) => {
 
-    });
+    // });
 
   }
 

@@ -5,11 +5,9 @@ import { User } from "./User";
 export interface Restaurant {
   restaurantId?: number,
   restaurantName: string;
-  manager: string,
-  email: string,
   mobilePhone: string;
   localPhone: string;
   address?: Address
   user?: User
-  restaurantType: RestaurantType;
+  restaurantType?: RestaurantType;
 }
