@@ -43,6 +43,7 @@ public class User {
     @NotBlank
     private boolean enabled;
 
+    private String token;
 
     @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"}) // garbage fields
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

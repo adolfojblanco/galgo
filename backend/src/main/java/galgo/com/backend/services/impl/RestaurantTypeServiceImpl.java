@@ -41,6 +41,9 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
     @Transactional
     @Override
     public RestaurantType save(RestaurantType restaurantType) {
-        return null;
+        RestaurantType type = new RestaurantType();
+        type.setName(restaurantType.getName());
+        type.setEnabled(true);
+        return repository.save(type);
     }
 }

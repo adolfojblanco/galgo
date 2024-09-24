@@ -3,8 +3,10 @@ package galgo.com.backend.services.impl;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
 import galgo.com.backend.models.RestaurantType;
+import galgo.com.backend.models.User;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
+import galgo.com.backend.repositories.UserRepository;
 import galgo.com.backend.services.IRestaurantService;
 import galgo.com.backend.utilities.SendEmail;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class RestaurantServiceImpl implements IRestaurantService {
     private final Logger log = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
+    @Autowired private UserRepository userRepository;
     @Autowired private RestaurantRepository restaurantRepository;
     @Autowired private RestaurantTypeRepository restaurantTypeRepository;
     @Autowired private SendEmail sendEmail;
@@ -35,19 +38,20 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     public Restaurant save(Restaurant restaurant) {
+        User user = new User();
+        user.setFirstName(restaurant.getUser().getFirstName());
+        user.setLastName(restaurant.getUser().getLastName());
+        user.setPassword(restaurant.getUser().getFirstName());
+        user.setEmail(restaurant.getUser().getEmail());
+
         Restaurant rest = new Restaurant();
         rest.setRestaurantName(restaurant.getRestaurantName());
-        rest.setManager(restaurant.getManager());
         rest.setLocalPhone(restaurant.getLocalPhone());
         rest.setMobilePhone(restaurant.getMobilePhone());
-        rest.setEmail(restaurant.getEmail());
         rest.setEnabled(false);
-
         RestaurantType type = restaurantTypeRepository.findById(restaurant.getRestaurantType().getId()).orElseThrow();
         rest.setRestaurantType(type);
-        Restaurant newRest = restaurantRepository.save(rest);
-        this.sendEmail.newAccount(restaurant.getEmail());
-        return newRest;
+        return restaurantRepository.save(rest);
     }
 
     @Override
@@ -59,10 +63,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
     public Restaurant updateOneById(Long restaurantId, Restaurant restaurant) {
         Restaurant rest = restaurantRepository.findById(restaurantId).orElseThrow(null);
         rest.setRestaurantName(restaurant.getRestaurantName());
-        rest.setManager(restaurant.getManager());
         rest.setLocalPhone(restaurant.getLocalPhone());
         rest.setMobilePhone(restaurant.getMobilePhone());
-        rest.setEmail(restaurant.getEmail());
         rest.setRestaurantType(restaurant.getRestaurantType());
         return restaurantRepository.save(rest);
     }

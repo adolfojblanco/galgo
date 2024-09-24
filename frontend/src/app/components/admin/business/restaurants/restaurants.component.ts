@@ -4,6 +4,7 @@ import { RestaurantService } from '../../../../services/restaurant.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RestaurantDialogComponent } from './restaurant-dialog/restaurant-dialog.component';
 import { Router } from '@angular/router';
+import { RestaurantTypeComponent } from './restaurant-type/restaurant-type.component';
 
 @Component({
   selector: 'app-restaurants',
@@ -18,7 +19,7 @@ export class RestaurantsComponent implements OnInit {
 
   public restaurants!: Restaurant[];
   public dataSource = this.restaurants;
-  
+
   public displayedColumns: string[] = ['restaurantName', 'manager', 'mobilePhone', 'localPhone', 'enabled', 'actions'];
 
 
@@ -37,13 +38,19 @@ export class RestaurantsComponent implements OnInit {
   // Create new restaurant
   newRestaurant() {
     const dialogRef = this.dialog.open(RestaurantDialogComponent, {
-      width: '450px',
+      width: '500px',
     })
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result)
     });
   }
 
+  // Create new category
+  newCategory() {
+    const dialogRef = this.dialog.open(RestaurantTypeComponent, {
+      width: '500px',
+    })
+  }
 
 
 

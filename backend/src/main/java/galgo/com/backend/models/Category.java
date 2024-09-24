@@ -2,6 +2,7 @@ package galgo.com.backend.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,7 @@ public class Category {
 
     @Column(unique = true)
     private String categoryName;
+
+    @NotBlank
+    private boolean enabled;
 }

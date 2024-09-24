@@ -26,10 +26,6 @@ public class Restaurant {
     @Size(min = 3,max=30,message = "El nombre del restaurante debe tener al menos 3 caracteres y un maximo 30")
     private String restaurantName;
 
-    @NotNull(message = "manager Name should not be null")
-    @Size(min = 3,max=30,message = "name of min length should be 3 and max be 30")
-    private String manager;
-
     @NotNull(message = "local phone field should not be null")
     private String localPhone;
 
@@ -37,12 +33,11 @@ public class Restaurant {
     @NotBlank
     private String mobilePhone;
 
-    @NotNull(message = "email field should not be null")
-    @Column(unique = true)
-    private String email;
-
     @ManyToOne(cascade = CascadeType.ALL)
     private RestaurantType restaurantType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;

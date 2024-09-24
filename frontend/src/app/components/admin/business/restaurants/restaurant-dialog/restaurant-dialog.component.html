@@ -1,15 +1,11 @@
 <h2 mat-dialog-title>{{ titleForm }}</h2>
-<ng-template #successTemplate>
-  <b>Settings saved!</b>
-</ng-template>
-<ng-template #errorTemplate>
-  <b>Could not save.</b>
-</ng-template>
 
 <mat-divider></mat-divider>
+
 <div class="col-12">
   <mat-dialog-content class="mat-typography">
     <form autocomplete="off" class="row" [formGroup]="restaurantForm">
+      <!-- restaurant name -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Nombre del restaurante:</mat-label>
@@ -26,9 +22,11 @@
           </mat-hint>
         </mat-form-field>
       </p>
+
+      <!-- manager first name -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Nombre del Encargado</mat-label>
+          <mat-label>Nombres del Encargado</mat-label>
           <input
             type="text"
             matInput
@@ -43,6 +41,25 @@
         </mat-form-field>
       </p>
 
+      <!-- manager lastname -->
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Apellidos del Encargado</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Encargado:"
+            formControlName="manager"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('manager')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <!-- restaurant email -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Email</mat-label>
@@ -60,6 +77,7 @@
         </mat-form-field>
       </p>
 
+      <!-- mobile phone -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Télefono Movil:</mat-label>
@@ -77,6 +95,7 @@
         </mat-form-field>
       </p>
 
+      <!-- local phone -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Télefono Fijo:</mat-label>
@@ -93,6 +112,8 @@
           </mat-hint>
         </mat-form-field>
       </p>
+
+      <!-- restaurant category -->
       <p>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Tipo de Comida</mat-label>
@@ -103,10 +124,6 @@
           </mat-select>
         </mat-form-field>
       </p>
-
-      <!-- <p>
-        <mat-slide-toggle formControlName="is_active">Activo</mat-slide-toggle>
-      </p> -->
     </form>
     <mat-divider></mat-divider>
   </mat-dialog-content>
