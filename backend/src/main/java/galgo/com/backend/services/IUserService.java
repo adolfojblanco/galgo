@@ -13,7 +13,9 @@ public interface IUserService {
 
     public Optional<User> findById(Long id);
 
-    public User save(User user);
+    public User save(User user, String role);
+
+    public User restaurantUser(User user, String role);
 
     public Optional<User> update(User user, Long id);
 

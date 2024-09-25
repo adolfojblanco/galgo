@@ -1,9 +1,9 @@
 package galgo.com.backend.services;
 
+import galgo.com.backend.dto.RestaurantDTO;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ public interface IRestaurantService {
 
     Optional<Restaurant> findOneById(Long restaurantId);
 
-    Restaurant save(Restaurant restaurant);
+    Restaurant save(RestaurantDTO restaurant);
 
     void deleteById(Long restaurantId);
 

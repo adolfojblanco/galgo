@@ -15,4 +15,5 @@ public class ApiError implements Serializable {
     private LocalDateTime timestamp;
     private String url;
     private String method;
+
 }

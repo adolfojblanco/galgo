@@ -8,6 +8,8 @@
 *.tmp.*
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
+/ios
+/android
 
 *.log
 log.txt

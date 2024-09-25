@@ -36,11 +36,8 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
-    @Size(min = 6)
     private String password;
 
-    @NotBlank
     private boolean enabled;
 
     private String token;

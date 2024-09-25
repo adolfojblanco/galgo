@@ -1,14 +1,16 @@
 package galgo.com.backend.services.impl;
 
+import galgo.com.backend.dto.RestaurantDTO;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
-import galgo.com.backend.models.RestaurantType;
 import galgo.com.backend.models.User;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
 import galgo.com.backend.repositories.UserRepository;
 import galgo.com.backend.services.IRestaurantService;
+import galgo.com.backend.services.IUserService;
 import galgo.com.backend.utilities.SendEmail;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class RestaurantServiceImpl implements IRestaurantService {
@@ -25,6 +28,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
     @Autowired private RestaurantRepository restaurantRepository;
     @Autowired private RestaurantTypeRepository restaurantTypeRepository;
     @Autowired private SendEmail sendEmail;
+    @Autowired
+    private IUserService userService;
+
+
 
     @Override
     public List<Restaurant> findAll() {
@@ -37,20 +44,23 @@ public class RestaurantServiceImpl implements IRestaurantService {
     }
 
     @Override
-    public Restaurant save(Restaurant restaurant) {
+    public Restaurant save(RestaurantDTO restaurant) {
+
         User user = new User();
-        user.setFirstName(restaurant.getUser().getFirstName());
-        user.setLastName(restaurant.getUser().getLastName());
-        user.setPassword(restaurant.getUser().getFirstName());
-        user.setEmail(restaurant.getUser().getEmail());
+        user.setFirstName(restaurant.getFirstName());
+        user.setLastName(restaurant.getLastName());
+        user.setUsername(restaurant.getUsername());
+        user.setEmail(restaurant.getEmail());
+        user.setEnabled(true);
+        User userDb = userRepository.save(user);
+
 
         Restaurant rest = new Restaurant();
         rest.setRestaurantName(restaurant.getRestaurantName());
         rest.setLocalPhone(restaurant.getLocalPhone());
         rest.setMobilePhone(restaurant.getMobilePhone());
+        rest.setUser(userDb);
         rest.setEnabled(false);
-        RestaurantType type = restaurantTypeRepository.findById(restaurant.getRestaurantType().getId()).orElseThrow();
-        rest.setRestaurantType(type);
         return restaurantRepository.save(rest);
     }
 

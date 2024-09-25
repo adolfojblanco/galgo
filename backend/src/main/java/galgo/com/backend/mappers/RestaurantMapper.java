@@ -12,4 +12,6 @@ public interface RestaurantMapper {
 
     RestaurantDTO restaurantToRestaurantDTO(Restaurant restaurant);
 
+    Restaurant restaurantDTOtoRestaurant(RestaurantDTO restaurantDTO);
+
 }
