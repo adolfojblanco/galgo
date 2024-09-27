@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { RestaurantTypesService } from '../../../../../services/restaurant-types.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-restaurant-type',
@@ -11,6 +12,8 @@ import { RestaurantTypesService } from '../../../../../services/restaurant-types
 export class RestaurantTypeComponent {
   private toast = inject(HotToastService);
   private fb = inject(FormBuilder)
+  private dialogRef = inject(MatDialogRef<RestaurantTypeComponent>);
+
 
   private restTypesServices = inject(RestaurantTypesService);
 
@@ -25,6 +28,7 @@ export class RestaurantTypeComponent {
     this.restTypesServices.createType(this.typeForm.value).subscribe((res) => {
       this.typeForm.reset()
       this.toast.success(`Registrado correctamente`)
+      this.dialogRef.close();
     })
   }
 

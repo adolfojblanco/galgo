@@ -1,5 +1,7 @@
 package galgo.com.backend.services.impl;
 
+import galgo.com.backend.dto.RestaurantTypeDTO;
+import galgo.com.backend.mappers.RestaurantTypeMapper;
 import galgo.com.backend.models.RestaurantType;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
 import galgo.com.backend.services.IRestaurantTypeService;
@@ -22,28 +24,32 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<RestaurantType> findAll() {
-        return (List<RestaurantType>) this.repository.findAll();
+    public List<RestaurantTypeDTO> findAll() {
+        List<RestaurantType> restaurantTypes = (List<RestaurantType>) repository.findAll();
+        return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTOList(restaurantTypes);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<RestaurantType> findById(Long id) {
-        return this.repository.findById(id);
+    public Optional<RestaurantTypeDTO> findById(Long id) {
+        RestaurantType restaurantType = repository.findById(id).orElse(null);
+        return Optional.ofNullable(RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(restaurantType));
     }
 
     @Transactional
     @Override
-    public RestaurantType updateById(Long id, RestaurantType restaurantType) {
-        return null;
+    public RestaurantTypeDTO updateById(RestaurantTypeDTO restaurantTypeDTO) {
+        RestaurantType restaurantType = RestaurantTypeMapper.INSTANCE.restaurantTypeDTOToRestaurantType(restaurantTypeDTO);
+        return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(restaurantType);
     }
+
 
     @Transactional
     @Override
-    public RestaurantType save(RestaurantType restaurantType) {
+    public RestaurantTypeDTO save(RestaurantTypeDTO restaurantTypeDTO) {
         RestaurantType type = new RestaurantType();
-        type.setName(restaurantType.getName());
+        type.setName(restaurantTypeDTO.getName());
         type.setEnabled(true);
-        return repository.save(type);
+        return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(repository.save(type));
     }
 }

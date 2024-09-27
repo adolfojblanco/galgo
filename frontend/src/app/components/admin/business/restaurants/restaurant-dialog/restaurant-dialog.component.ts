@@ -31,10 +31,10 @@ export class RestaurantDialogComponent implements OnInit {
     mobilePhone: ['567567567', [Validators.required, Validators.minLength(9)]],
     localPhone: ['567567567', [Validators.required, Validators.minLength(9)]],
     restaurantType: [, [Validators.required]],
-    username: ['alebla'],
+    username: ['alexblanco'],
     firstName: ['Alejandro', [Validators.required]],
     lastName: ['Blanco', [Validators.required]],
-    email: ['alse@gmail.com', [Validators.email]],
+    email: ['ajblanco156@gmail.com', [Validators.email]],
   })
 
   ngOnInit(): void {

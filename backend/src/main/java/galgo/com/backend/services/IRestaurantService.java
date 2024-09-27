@@ -1,6 +1,6 @@
 package galgo.com.backend.services;
 
-import galgo.com.backend.dto.RestaurantDTO;
+import galgo.com.backend.dto.RestaurantUserSaveRequest;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
 
@@ -13,7 +13,7 @@ public interface IRestaurantService {
 
     Optional<Restaurant> findOneById(Long restaurantId);
 
-    Restaurant save(RestaurantDTO restaurant);
+    Restaurant save(RestaurantUserSaveRequest restaurant);
 
     void deleteById(Long restaurantId);
 

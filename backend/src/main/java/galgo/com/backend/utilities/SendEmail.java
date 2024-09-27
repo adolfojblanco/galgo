@@ -1,39 +1,44 @@
 package galgo.com.backend.utilities;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+import galgo.com.backend.models.User;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
 @Service
+@RequiredArgsConstructor
 public class SendEmail {
 
+    @Value("${spring.mail.username}")
+    private String fromMail;
 
+    private final JavaMailSender mailSender;
+    private final TemplateEngine templateEngine;
 
+    @Async
+    public void sendMail(User user) throws MessagingException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
 
-    @Autowired
-    private JavaMailSender mailSender;
+        mimeMessageHelper.setFrom(fromMail);
+        mimeMessageHelper.setTo(user.getEmail());
+        mimeMessageHelper.setSubject("Email de bienvenida " + user.getFirstName());
+        Context context = new Context();
+        context.setVariable("content", user);
+        String processedString = templateEngine.process("welcome", context);
 
-    public void sendEmail(String to, String subject, String content) {
+        mimeMessageHelper.setText(processedString, true);
 
-        SimpleMailMessage email = new SimpleMailMessage();
-
-        email.setTo(to);
-        email.setSubject(subject);
-        email.setText(content);
-        mailSender.send(email);
+        mailSender.send(mimeMessage);
     }
-    public void newAccount(String to) {
-
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom("info@adolfob.com");
-        email.setTo(to);
-        email.setSubject("ALTA DE USUARIO");
-        email.setText("Bienvenido");
-
-        mailSender.send(email);
-    }
-
 }
 
 

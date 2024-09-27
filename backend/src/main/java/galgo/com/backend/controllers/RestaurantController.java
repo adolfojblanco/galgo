@@ -1,6 +1,6 @@
 package galgo.com.backend.controllers;
 
-import galgo.com.backend.dto.RestaurantDTO;
+import galgo.com.backend.dto.RestaurantUserSaveRequest;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
 import galgo.com.backend.services.IAddressService;
@@ -44,11 +44,11 @@ public class RestaurantController {
     };
 
 
-    /**
+    /*
      * Save restaurant
      */
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody RestaurantDTO restaurant, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody RestaurantUserSaveRequest restaurant, BindingResult result) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 

@@ -1,6 +1,7 @@
 package galgo.com.backend.controllers;
 
 
+import galgo.com.backend.dto.RestaurantTypeDTO;
 import galgo.com.backend.models.RestaurantType;
 import galgo.com.backend.services.IRestaurantTypeService;
 import jakarta.validation.Valid;
@@ -21,15 +22,12 @@ public class RestaurantTypeController {
 
 
     @GetMapping
-    public List<RestaurantType> getAll(){
+    public List<RestaurantTypeDTO> getAll(){
         return this.restaurantTypeService.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody RestaurantType type, BindingResult result) {
-        if (result.hasErrors()) {
-            System.out.println("TENEMOS ERRORES");
-        }
+    public ResponseEntity<?> create(@Valid @RequestBody RestaurantTypeDTO type, BindingResult result) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantTypeService.save(type));
     }
 }

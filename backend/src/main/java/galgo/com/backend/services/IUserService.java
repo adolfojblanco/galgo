@@ -15,8 +15,6 @@ public interface IUserService {
 
     public User save(User user, String role);
 
-    public User restaurantUser(User user, String role);
-
     public Optional<User> update(User user, Long id);
 
     public void deleteById(Long id);

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -83,22 +82,6 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-
-    /**
-     * Save a user with restaurant
-     */
-    @Override
-    public User restaurantUser(User user, String role) {
-        List<Role> roles = new ArrayList<>();
-        Optional<Role> optionalRole = roleRepository.findByName(role);
-        if (optionalRole.isPresent()) {
-            roles.add(optionalRole.get());
-            user.setRoles(roles);
-        }
-        user.setToken(passwordEncoder.encode(new Date().toString()));
-        return userRepository.save(user);
-    }
-
 
     @Transactional
     @Override

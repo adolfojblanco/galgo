@@ -1,19 +1,19 @@
 package galgo.com.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import galgo.com.backend.models.Address;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import galgo.com.backend.models.RestaurantType;
+import galgo.com.backend.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantDTO implements Serializable {
+public class RestaurantUserSaveRequest {
 
     private Long restaurantId;
 
@@ -22,6 +22,10 @@ public class RestaurantDTO implements Serializable {
     private String localPhone;
 
     private String mobilePhone;
+
+    private RestaurantType restaurantType;
+
+    private Address address;
 
     private boolean enabled;
 
@@ -33,4 +37,9 @@ public class RestaurantDTO implements Serializable {
 
     private String email;
 
+    private String password;
+
+    private String token;
+
+    private List<Role> roles;
 }

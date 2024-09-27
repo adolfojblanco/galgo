@@ -1,21 +1,27 @@
 package galgo.com.backend.services.impl;
 
-import galgo.com.backend.dto.RestaurantDTO;
+import galgo.com.backend.dto.RestaurantUserSaveRequest;
 import galgo.com.backend.models.Address;
 import galgo.com.backend.models.Restaurant;
+import galgo.com.backend.models.Role;
 import galgo.com.backend.models.User;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
+import galgo.com.backend.repositories.RoleRepository;
 import galgo.com.backend.repositories.UserRepository;
 import galgo.com.backend.services.IRestaurantService;
 import galgo.com.backend.services.IUserService;
-import galgo.com.backend.utilities.SendEmail;
 
+import galgo.com.backend.utilities.SendEmail;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +30,15 @@ import java.util.Optional;
 public class RestaurantServiceImpl implements IRestaurantService {
     private final Logger log = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
+    @Autowired private RoleRepository roleRepository;
     @Autowired private UserRepository userRepository;
     @Autowired private RestaurantRepository restaurantRepository;
     @Autowired private RestaurantTypeRepository restaurantTypeRepository;
-    @Autowired private SendEmail sendEmail;
+    @Autowired private PasswordEncoder encoder;
+    @Autowired private SendEmail emailingService;
+
     @Autowired
     private IUserService userService;
-
-
 
     @Override
     public List<Restaurant> findAll() {
@@ -43,25 +50,35 @@ public class RestaurantServiceImpl implements IRestaurantService {
         return restaurantRepository.findById(restaurantId);
     }
 
+    @SneakyThrows
     @Override
-    public Restaurant save(RestaurantDTO restaurant) {
+    public Restaurant save(RestaurantUserSaveRequest request) {
 
         User user = new User();
-        user.setFirstName(restaurant.getFirstName());
-        user.setLastName(restaurant.getLastName());
-        user.setUsername(restaurant.getUsername());
-        user.setEmail(restaurant.getEmail());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
         user.setEnabled(true);
+        user.setToken(encoder.encode(new Date(System.currentTimeMillis()).toString()));
+
+        List<Role> roles = new ArrayList<>();
+        Optional<Role> optionalRole = roleRepository.findByName("ROLE_BUSINESS");
+        if (optionalRole.isPresent()) {
+            roles.add(optionalRole.get());
+            user.setRoles(roles);
+        }
         User userDb = userRepository.save(user);
 
-
         Restaurant rest = new Restaurant();
-        rest.setRestaurantName(restaurant.getRestaurantName());
-        rest.setLocalPhone(restaurant.getLocalPhone());
-        rest.setMobilePhone(restaurant.getMobilePhone());
+        rest.setRestaurantName(request.getRestaurantName());
+        rest.setLocalPhone(request.getLocalPhone());
+        rest.setMobilePhone(request.getMobilePhone());
         rest.setUser(userDb);
         rest.setEnabled(false);
+        emailingService.sendMail(user);
         return restaurantRepository.save(rest);
+
     }
 
     @Override
