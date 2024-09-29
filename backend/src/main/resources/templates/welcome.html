@@ -4,8 +4,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-  <h1>Hola, te damos la bienvenida a GalGO</h1>
-<div th:utext="${content}">
+  <h1>Te damos la bienvenida a GalGO</h1>
+  <hr>
+  <p>
+    Ya casi estas listo para comenzar a vender, el siguiente paso es confirmar tu cuenta.
+    <a th:href="@{'http://localhost:4200/auth/confirm/'+${content.token}}">Confirma tu cuenta</a>
+  </p>
 
 </div>
 </body>

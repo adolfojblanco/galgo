@@ -27,6 +27,11 @@ export class AuthService {
     );
   }
 
+  /** Confirm and activate account */
+  confirmAccount(token: string, username: string): Observable<any> {
+    return this.http.post<any>(`${this.urlEndPoint}/login`, username);
+  }
+
   /** Load token from localstorage */
   getToken() {
     const token: any = localStorage.getItem('token');

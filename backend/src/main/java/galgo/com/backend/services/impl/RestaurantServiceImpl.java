@@ -53,6 +53,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
     @SneakyThrows
     @Override
     public Restaurant save(RestaurantUserSaveRequest request) {
+        String token = encoder.encode(new Date(System.currentTimeMillis()).toString());
 
         User user = new User();
         user.setFirstName(request.getFirstName());
@@ -60,7 +61,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setEnabled(true);
-        user.setToken(encoder.encode(new Date(System.currentTimeMillis()).toString()));
+        user.setToken(token.substring(10, token.length()-1));
 
         List<Role> roles = new ArrayList<>();
         Optional<Role> optionalRole = roleRepository.findByName("ROLE_BUSINESS");

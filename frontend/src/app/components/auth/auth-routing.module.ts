@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
+import { ConfirmAccountComponent } from './confirm-account/confirm-account.component';
 
 const routes: Routes = [
   {
@@ -13,10 +14,9 @@ const routes: Routes = [
         component: LoginComponent
       },
       {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: 'login',
-      },
+        path: 'confirm/:token',
+        component: ConfirmAccountComponent,
+      }
     ]
   }
 ];
