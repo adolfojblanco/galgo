@@ -14,5 +14,7 @@ public interface IAddressService {
 
     Address updateOneById(Long addressId, Address address);
 
+    Address addRestaurantAddress(Long restaurantId, Address address);
+
     Address disableOneById(Long addressId);
 }

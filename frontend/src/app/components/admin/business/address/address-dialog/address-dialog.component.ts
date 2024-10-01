@@ -21,30 +21,30 @@ export class AddressDialogComponent {
   public textButton: string = 'Guardar';
   public formTitle: string = 'Dirección';
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Restaurant, private dialogRef: MatDialogRef<AddressDialogComponent>) {
-    console.log(data)
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Restaurant,
+    private dialogRef: MatDialogRef<AddressDialogComponent>) {
     if (data.address) {
       this.addressForm.reset(data.address)
       this.textButton = 'Edición'
     }
-
   }
 
   /** Address Form */
   public addressForm: FormGroup = this.fb.group({
     addressId: [],
-    name: ['', [Validators.required]],
-    street: ['', [Validators.required]],
-    buildingNumber: ['', [Validators.required]],
-    postalCode: ['', [Validators.required, Validators.min(4)]],
-    floorNumber: ['', [Validators.required]],
-    doorNumber: ['', [Validators.required]],
-    area: ['', [Validators.required]],
-    city: ['', [Validators.required]],
-    country: ['', [Validators.required]],
-    latitude: ['', [Validators.required]],
-    longitude: ['', [Validators.required]],
-    active: [],
+    addressName: ['Principal', [Validators.required]],
+    buildingNumber: ['Edificio', [Validators.required]],
+    floorNumber: ['Piso', [Validators.required]],
+    doorNumber: ['Puerta', [Validators.required]],
+    street: ['Calle', [Validators.required]],
+    area: ['Area', [Validators.required]],
+    city: ['Ciudad', [Validators.required]],
+    postalCode: ['Postal', [Validators.required, Validators.min(4)]],
+    country: ['España', [Validators.required]],
+    latitude: ['lat', [Validators.required]],
+    longitude: ['long', [Validators.required]],
+    active: [true],
   })
 
 
@@ -55,14 +55,13 @@ export class AddressDialogComponent {
     }
     if (this.addressForm.controls['addressId'].value) {
       this.addressService.editAddress(this.addressForm.value).subscribe((res) => {
-        console.log(res)
         this.dialogRef.close(true)
       })
     } else {
-      this.restaurantService.addAddress(this.data.restaurantId!, this.addressForm.value).subscribe((res: Restaurant) => {
-        this.dialogRef.close(res);
-        this.toast.success("Direccción Registrada");
-      }
+        this.addressService.addRestaurantAddress(this.data.restaurantId!, this.addressForm.value).subscribe((res) => {
+          this.dialogRef.close(res);
+          this.toast.success("Direccción Registrada");
+        }
       )
     }
   }

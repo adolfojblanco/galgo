@@ -1,10 +1,7 @@
 package galgo.com.backend.services.impl;
 
 import galgo.com.backend.dto.RestaurantUserSaveRequest;
-import galgo.com.backend.models.Address;
-import galgo.com.backend.models.Restaurant;
-import galgo.com.backend.models.Role;
-import galgo.com.backend.models.User;
+import galgo.com.backend.models.*;
 import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.repositories.RestaurantTypeRepository;
 import galgo.com.backend.repositories.RoleRepository;
@@ -50,7 +47,6 @@ public class RestaurantServiceImpl implements IRestaurantService {
         return restaurantRepository.findById(restaurantId);
     }
 
-    @SneakyThrows
     @Override
     public Restaurant save(RestaurantUserSaveRequest request) {
         String token = encoder.encode(new Date(System.currentTimeMillis()).toString());
@@ -71,20 +67,22 @@ public class RestaurantServiceImpl implements IRestaurantService {
         }
         User userDb = userRepository.save(user);
 
+        RestaurantType restaurantType = restaurantTypeRepository.findById(request.getRestaurantType().getId()).orElseThrow();
+
         Restaurant rest = new Restaurant();
         rest.setRestaurantName(request.getRestaurantName());
         rest.setLocalPhone(request.getLocalPhone());
         rest.setMobilePhone(request.getMobilePhone());
+        rest.setRestaurantType(restaurantType);
         rest.setUser(userDb);
         rest.setEnabled(false);
-        emailingService.sendMail(user);
         return restaurantRepository.save(rest);
 
     }
 
     @Override
     public void deleteById(Long restaurantId) {
-
+        restaurantRepository.deleteById(restaurantId);
     }
 
     @Override
@@ -105,10 +103,4 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     }
 
-    @Override
-    public Restaurant addAddress(Long restaurantId, Address address) {
-        Restaurant rest = restaurantRepository.findById(restaurantId).orElseThrow(null);
-        rest.setAddress(address);
-        return restaurantRepository.save(rest);
-    }
 }

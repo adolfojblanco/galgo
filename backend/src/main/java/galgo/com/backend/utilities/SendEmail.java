@@ -30,7 +30,7 @@ public class SendEmail {
 
         mimeMessageHelper.setFrom(fromMail);
         mimeMessageHelper.setTo(user.getEmail());
-        mimeMessageHelper.setSubject("Email de bienvenida " + user.getFirstName());
+        mimeMessageHelper.setSubject("Bienvenido a GalGO");
         Context context = new Context();
         context.setVariable("content", user);
         String processedString = templateEngine.process("welcome", context);

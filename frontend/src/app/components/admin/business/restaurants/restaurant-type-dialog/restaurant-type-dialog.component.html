@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ titleForm }}:</h2>
+
+<mat-divider></mat-divider>
+
+<div class="col-12">
+  <mat-dialog-content class="mat-typography">
+    <form autocomplete="off" class="row" [formGroup]="typeForm">
+      <!-- restaurant category -->
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Categoria:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Categoria del restaurante"
+            formControlName="name"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('name')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-slide-toggle formControlName="enabled">Activo</mat-slide-toggle>
+      </p>
+    </form>
+    <mat-divider></mat-divider>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="typeForm.invalid"
+      (click)="submit()"
+    >
+      {{ textButton }}
+    </button>
+  </mat-dialog-actions>
+</div>

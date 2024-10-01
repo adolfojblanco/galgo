@@ -52,10 +52,15 @@ public class SpringSecurityConfig {
                                 "/api/restaurants/**",
                                 "/api/restaurants",
                                 "/api/users",
-                                "/api/address"
+                                "/api/address",
+                                "/address/{restaurantId}/add-address"
                         ).permitAll()
                         .requestMatchers(HttpMethod.PUT,
-                                "/api/restaurants/{restaurantId}/activate"
+                                "/restaurants/{restaurantId}/activate",
+                                "/restaurants/types/{id}"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/restaurants/types/{id}"
                         ).permitAll()
                         .anyRequest().permitAll())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))

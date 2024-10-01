@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/address")
 public class AddressController {
 
     @Autowired
@@ -58,6 +58,17 @@ public class AddressController {
     public ResponseEntity<Address> disabledOneById(@PathVariable Long addressId){
         Address address = addressService.disableOneById(addressId);
         return null;
+    }
+
+    /**
+     * Add address to restaurant
+     * @param restaurantId
+     * @param address
+     * @return restaurant
+     */
+    @PostMapping("/{restaurantId}/add-address")
+    public ResponseEntity<?> addRestaurantAddress(@PathVariable Long restaurantId, @RequestBody @Valid Address address){
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.addRestaurantAddress(restaurantId, address));
     }
 
 }

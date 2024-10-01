@@ -80,17 +80,4 @@ public class RestaurantController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Error", "Restaurant not found"));
     }
 
-    /**
-     * Add address to restaurant
-     * @param restaurantId
-     * @param address
-     * @return restaurant
-     */
-    @PutMapping("/{restaurantId}/add-address")
-    public ResponseEntity<?> addAddress(@PathVariable Long restaurantId, @RequestBody @Valid Address address){
-        Address newAddress =  addressService.save(address);
-        return ResponseEntity.status(HttpStatus.OK).body(restaurantService.addAddress(restaurantId, newAddress));
-    }
-
-
 }

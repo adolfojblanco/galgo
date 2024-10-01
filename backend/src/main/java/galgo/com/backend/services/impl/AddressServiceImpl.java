@@ -2,7 +2,9 @@ package galgo.com.backend.services.impl;
 
 
 import galgo.com.backend.models.Address;
+import galgo.com.backend.models.Restaurant;
 import galgo.com.backend.repositories.AddressRepository;
+import galgo.com.backend.repositories.RestaurantRepository;
 import galgo.com.backend.services.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class AddressServiceImpl implements IAddressService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @Transactional(readOnly = true)
     @Override
     public Optional<Address> findOneById(Long addressId) {
@@ -26,6 +31,7 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public Address save(Address address) {
         Address addressNew = new Address();
+        addressNew.setAddressName(address.getAddressName());
         addressNew.setStreet(address.getStreet());
         addressNew.setBuildingNumber(address.getBuildingNumber());
         addressNew.setPostalCode(address.getPostalCode());
@@ -33,7 +39,6 @@ public class AddressServiceImpl implements IAddressService {
         addressNew.setDoorNumber(address.getDoorNumber());
         addressNew.setArea(address.getArea());
         addressNew.setCity(address.getCity());
-        addressNew.setState(address.getState());
         addressNew.setCountry(address.getCountry());
         addressNew.setLatitude(address.getLatitude());
         addressNew.setLongitude(address.getLongitude());
@@ -63,6 +68,32 @@ public class AddressServiceImpl implements IAddressService {
         addressBd.setLatitude(address.getLatitude());
         addressBd.setLongitude(address.getLongitude());
         return addressRepository.save(addressBd);
+    }
+
+    @Override
+    public Address addRestaurantAddress(Long restaurantId, Address address) {
+        Restaurant rest = this.restaurantRepository.findById(restaurantId).orElseThrow(null);
+        if (rest != null) {
+            Address addressNew = new Address();
+            addressNew.setAddressName(address.getAddressName());
+            addressNew.setStreet(address.getStreet());
+            addressNew.setBuildingNumber(address.getBuildingNumber());
+            addressNew.setPostalCode(address.getPostalCode());
+            addressNew.setFloorNumber(address.getFloorNumber());
+            addressNew.setDoorNumber(address.getDoorNumber());
+            addressNew.setArea(address.getArea());
+            addressNew.setCity(address.getCity());
+            addressNew.setCountry(address.getCountry());
+            addressNew.setLatitude(address.getLatitude());
+            addressNew.setLongitude(address.getLongitude());
+            addressNew.setActive(true);
+
+            addressNew = this.addressRepository.save(addressNew);
+            rest.setAddress(addressNew);
+            this.restaurantRepository.save(rest);
+            return addressNew;
+        }
+        return null;
     }
 
     @Transactional

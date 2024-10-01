@@ -23,7 +23,10 @@ export class RestaurantDialogComponent implements OnInit {
   private restaurantService = inject(RestaurantService);
   private restaurantTypeService = inject(RestaurantTypesService);
 
-  constructor(private dialogRef: MatDialogRef<RestaurantDialogComponent>) { }
+  constructor(
+    private dialogRef: MatDialogRef<RestaurantDialogComponent>) {
+
+  }
 
   restaurantForm: FormGroup = this.fb.group({
     restaurantId: [''],
@@ -55,7 +58,6 @@ export class RestaurantDialogComponent implements OnInit {
     if (this.restaurantForm.controls['restaurantId'].value) {
       // Edit restaurant
     } else {
-      console.log(this.restaurantForm.value)
       // Create a restaurant
       this.restaurantService.createRestaurant(this.restaurantForm.value).pipe(
         this.toast.observe(
@@ -66,7 +68,7 @@ export class RestaurantDialogComponent implements OnInit {
         ),
         catchError((error) => of(error))
       ).subscribe((res) => {
-        this.dialogRef.close();
+        this.dialogRef.close(res);
       });
     }
   }

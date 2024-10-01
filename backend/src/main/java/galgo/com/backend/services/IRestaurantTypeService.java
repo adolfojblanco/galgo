@@ -11,8 +11,10 @@ public interface IRestaurantTypeService {
 
     Optional<RestaurantTypeDTO> findById(Long id);
 
-    RestaurantTypeDTO updateById(RestaurantTypeDTO restaurantTypeDTO);
+    RestaurantTypeDTO updateById(Long restTypeId, RestaurantTypeDTO restaurantTypeDTO);
 
     RestaurantTypeDTO save(RestaurantTypeDTO restaurantTypeDTO);
+
+    boolean deleteById(Long id);
 
 }

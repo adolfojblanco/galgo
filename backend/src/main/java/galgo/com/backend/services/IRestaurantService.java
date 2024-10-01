@@ -21,5 +21,4 @@ public interface IRestaurantService {
 
     Restaurant disableOneById(Long restaurantId);
 
-    Restaurant addAddress(Long restaurantId, Address address);
 }

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RestaurantDialogComponent } from './restaurants/restaurant-dialog/restaurant-dialog.component';
 import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
 import { AddressDialogComponent } from './address/address-dialog/address-dialog.component';
+import { RestaurantTypeDialogComponent } from './restaurants/restaurant-type-dialog/restaurant-type-dialog.component';
 import { RestaurantTypeComponent } from './restaurants/restaurant-type/restaurant-type.component';
 
 
@@ -19,7 +20,8 @@ import { RestaurantTypeComponent } from './restaurants/restaurant-type/restauran
     RestaurantDialogComponent,
     RestaurantDetailsComponent,
     AddressDialogComponent,
-    RestaurantTypeComponent
+    RestaurantTypeComponent,
+    RestaurantTypeDialogComponent,
   ],
   imports: [
     CommonModule,

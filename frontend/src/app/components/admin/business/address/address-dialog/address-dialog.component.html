@@ -10,11 +10,11 @@
             type="text"
             matInput
             placeholder="Nombre"
-            formControlName="name"
+            formControlName="addressName"
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('name')">
+          <mat-hint *ngIf="isValid('addressName')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>
@@ -65,7 +65,7 @@
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('longitude')">
+          <mat-hint *ngIf="isValid('postalCode')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>
@@ -148,7 +148,7 @@
             class="full-width"
             required
           />
-          <mat-hint *ngIf="isValid('street')">
+          <mat-hint *ngIf="isValid('country')">
             El campo es requerido <strong>Requerido</strong>
           </mat-hint>
         </mat-form-field>

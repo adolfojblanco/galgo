@@ -36,9 +36,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       if (err.status === 500) {
-        if (err.error.message.includes("DATABASE_QUERY_ERROR")) {
+        if (err.error.error.includes("Duplicate entry")) {
           const errorMsg = err.error.error.split('\'');
           toast.error(`Campo duplicado: ${errorMsg[1]}`)
+        }else if(err.error.error.includes("foreign key")){
+          toast.error(`No se puede eliminar, es un campo relacionado`)
         }else{
           toast.error(`${err.error.message}`)
         }

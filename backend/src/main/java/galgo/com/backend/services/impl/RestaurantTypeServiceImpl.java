@@ -38,9 +38,12 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
 
     @Transactional
     @Override
-    public RestaurantTypeDTO updateById(RestaurantTypeDTO restaurantTypeDTO) {
+    public RestaurantTypeDTO updateById(Long restTypeId, RestaurantTypeDTO restaurantTypeDTO) {
         RestaurantType restaurantType = RestaurantTypeMapper.INSTANCE.restaurantTypeDTOToRestaurantType(restaurantTypeDTO);
-        return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(restaurantType);
+        restaurantType.setName(restaurantTypeDTO.getName());
+        restaurantType.setEnabled(restaurantTypeDTO.getEnabled());
+        RestaurantType updateRestType = repository.save(restaurantType);
+        return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(updateRestType);
     }
 
 
@@ -51,5 +54,16 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
         type.setName(restaurantTypeDTO.getName());
         type.setEnabled(true);
         return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(repository.save(type));
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteById(Long id) {
+        Optional<RestaurantType> restaurantType = this.repository.findById(id);
+        if (restaurantType.isPresent()){
+            repository.deleteById(restaurantType.get().getId());
+            return true;
+        }
+        return false;
     }
 }

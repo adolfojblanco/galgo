@@ -1,43 +1,82 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HotToastService } from '@ngxpert/hot-toast';
+import { Component, inject, OnInit } from '@angular/core';
+import { RestaurantType } from '../../../../../models/RestaurantType';
 import { RestaurantTypesService } from '../../../../../services/restaurant-types.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { RestaurantTypeDialogComponent } from '../restaurant-type-dialog/restaurant-type-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-restaurant-type',
   templateUrl: './restaurant-type.component.html',
   styles: ``
 })
-export class RestaurantTypeComponent {
-  private toast = inject(HotToastService);
-  private fb = inject(FormBuilder)
-  private dialogRef = inject(MatDialogRef<RestaurantTypeComponent>);
+export class RestaurantTypeComponent implements OnInit {
+  public restaurantsTypes!: RestaurantType[];
+  public dataSource = this.restaurantsTypes;
+  private dialog = inject(MatDialog)
 
+  private restTypeService = inject(RestaurantTypesService)
+  public displayedColumns: string[] = ['name', 'enabled', 'actions'];
 
-  private restTypesServices = inject(RestaurantTypesService);
+  ngOnInit(): void {
+    this.loadRestTypes();
+  }
 
-  public titleForm = 'Nueva Categoria'
-  public textButton = 'Guardar'
-
-  typeForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.min(3)]],
-  })
-
-  submit() {
-    this.restTypesServices.createType(this.typeForm.value).subscribe((res) => {
-      this.typeForm.reset()
-      this.toast.success(`Registrado correctamente`)
-      this.dialogRef.close();
+  loadRestTypes(): void {
+    this.restTypeService.getAllTypes().subscribe((res) => {
+      this.dataSource = res
     })
   }
 
-
-  isValid(field: string) {
-    return (
-      this.typeForm.controls[field].errors &&
-      this.typeForm.controls[field].touched
-    );
+  editRestType(restype: RestaurantType) {
+    const dialogRef = this.dialog.open(RestaurantTypeDialogComponent, {
+      width: '450px',
+      data: restype
+    })
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.loadRestTypes()
+      }
+    });
   }
 
+  addRestType() {
+    const dialogRef = this.dialog.open(RestaurantTypeDialogComponent, {
+      width: '450px',
+    })
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.loadRestTypes()
+      }
+    });
+  }
+
+  delete(restType: RestaurantType) {
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "Esta accion no se puede revertir!",
+      icon: "warning",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borralo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.restTypeService.deleteRestType(restType).subscribe((res) => {
+          if (res === null) {
+            Swal.fire({
+              title: "Eliminado!",
+              text: "Se elimino correctamente.",
+              icon: "success"
+            });
+            this.loadRestTypes();
+            ;
+
+          }
+        })
+      }
+    });
+  }
 }
