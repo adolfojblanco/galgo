@@ -100,7 +100,7 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public Address disableOneById(Long addressId) {
         Address address = addressRepository.findById(addressId).orElseThrow();
-        address.setActive(!address.isActive());
+        address.setActive(!address.getActive());
         return address;
     }
 }

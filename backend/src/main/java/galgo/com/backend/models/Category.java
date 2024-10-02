@@ -3,15 +3,16 @@ package galgo.com.backend.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Category {
 
     @Id
@@ -22,5 +23,13 @@ public class Category {
     private String categoryName;
 
     @NotBlank
-    private boolean enabled;
+    private Boolean enabled;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Product> products;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
 }

@@ -16,7 +16,7 @@ export class RestaurantTypeDialogComponent {
   private dialogRef = inject(MatDialogRef<RestaurantTypeDialogComponent>);
   private restTypesServices = inject(RestaurantTypesService);
 
-  public titleForm = 'Nueva Categoria'
+  public titleForm = 'nueva categoria'
   public textButton = 'Guardar'
 
   constructor(

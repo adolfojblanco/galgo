@@ -9,6 +9,8 @@ public interface IRestaurantTypeService {
 
     List<RestaurantTypeDTO> findAll();
 
+
+
     Optional<RestaurantTypeDTO> findById(Long id);
 
     RestaurantTypeDTO updateById(Long restTypeId, RestaurantTypeDTO restaurantTypeDTO);

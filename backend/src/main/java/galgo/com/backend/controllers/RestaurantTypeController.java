@@ -2,10 +2,8 @@ package galgo.com.backend.controllers;
 
 
 import galgo.com.backend.dto.RestaurantTypeDTO;
-import galgo.com.backend.models.RestaurantType;
 import galgo.com.backend.services.IRestaurantTypeService;
 import jakarta.validation.Valid;
-import org.hibernate.engine.jdbc.mutation.spi.BindingGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +24,11 @@ public class RestaurantTypeController {
     @GetMapping
     public List<RestaurantTypeDTO> getAll(){
         return this.restaurantTypeService.findAll();
+    }
+
+    @GetMapping("/{actives}")
+    public List<RestaurantTypeDTO> getActiveRestTypes() {
+        return null;
     }
 
     @PostMapping

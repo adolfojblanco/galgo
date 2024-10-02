@@ -10,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "restaurant_types")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

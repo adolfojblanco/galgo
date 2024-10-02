@@ -98,7 +98,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
     @Override
     public Restaurant disableOneById(Long restaurantId) {
         Restaurant rest = restaurantRepository.findById(restaurantId).orElseThrow(null);
-        rest.setEnabled(!rest.isEnabled());
+        rest.setEnabled(!rest.getEnabled());
         return restaurantRepository.save(rest);
 
     }

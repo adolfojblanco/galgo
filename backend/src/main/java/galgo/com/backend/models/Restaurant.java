@@ -4,17 +4,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Restaurant {
 
     @Id
@@ -22,7 +21,7 @@ public class Restaurant {
     private Long restaurantId;
 
     @Column(unique=true)
-    @NotBlank(message = "El nombre del restaurant no puede estar vacio")
+    @NotBlank(message = "El nombre del restaurante no puede estar vacio")
     @Size(min = 3,max=30,message = "El nombre del restaurante debe tener al menos 3 caracteres y un maximo 30")
     private String restaurantName;
 
@@ -42,7 +41,13 @@ public class Restaurant {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    private boolean enabled;
+    private Boolean enabled;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Product> products;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Category> categories;
 
 
 }

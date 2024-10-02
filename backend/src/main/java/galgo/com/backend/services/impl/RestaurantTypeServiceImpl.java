@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import static org.springframework.util.StringUtils.capitalize;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +41,7 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
     @Override
     public RestaurantTypeDTO updateById(Long restTypeId, RestaurantTypeDTO restaurantTypeDTO) {
         RestaurantType restaurantType = RestaurantTypeMapper.INSTANCE.restaurantTypeDTOToRestaurantType(restaurantTypeDTO);
-        restaurantType.setName(restaurantTypeDTO.getName());
+        restaurantType.setName(capitalize(restaurantTypeDTO.getName()));
         restaurantType.setEnabled(restaurantTypeDTO.getEnabled());
         RestaurantType updateRestType = repository.save(restaurantType);
         return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(updateRestType);
@@ -51,8 +52,8 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
     @Override
     public RestaurantTypeDTO save(RestaurantTypeDTO restaurantTypeDTO) {
         RestaurantType type = new RestaurantType();
-        type.setName(restaurantTypeDTO.getName());
-        type.setEnabled(true);
+        type.setName(capitalize(restaurantTypeDTO.getName()));
+        type.setEnabled(restaurantTypeDTO.getEnabled());
         return RestaurantTypeMapper.INSTANCE.restaurantTypeToRestaurantTypeDTO(repository.save(type));
     }
 

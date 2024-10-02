@@ -8,6 +8,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -92,7 +92,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
             userDb.setFirstName(user.getFirstName());
             userDb.setLastName(user.getLastName());
             userDb.setEmail(user.getEmail());
-            userDb.setEnabled(user.isEnabled());
+            userDb.setEnabled(user.getEnabled());
             userDb.setUsername(user.getUsername());
             return Optional.of(userRepository.save(userDb));
         }
