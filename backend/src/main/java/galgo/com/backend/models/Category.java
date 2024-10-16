@@ -25,11 +25,4 @@ public class Category {
     @NotBlank
     private Boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Product> products;
-
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
-
 }

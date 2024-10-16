@@ -4,6 +4,7 @@ package galgo.com.backend.auth.filters;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import galgo.com.backend.models.Role;
 import galgo.com.backend.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,10 +20,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static galgo.com.backend.auth.TokenJwtConfig.*;
 
@@ -104,7 +103,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         Map<String, String> body = new HashMap<>();
-        body.put("message", "Error en la autenticación credenciales invalidas");
+        body.put("message", "Error en la autenticación, credenciales invalidas");
         body.put("error", failed.getMessage());
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
         response.setContentType(CONTENT_TYPE);

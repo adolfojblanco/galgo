@@ -33,8 +33,10 @@ export class LoginComponent {
   login() {
     this.authService
       .login(this.loginForm.value)
-      .subscribe((res) => {
-        console.log(res)
+      .subscribe((res:any) => {
+        if(res) {
+          this.toast.success(`${res.message}`)
+        }
       });
   }
 }

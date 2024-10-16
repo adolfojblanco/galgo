@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Table(name = "products")
 @Entity
@@ -27,13 +28,13 @@ public class Product {
 
     private BigDecimal price;
 
-    private Boolean enabled;
+    private boolean enabled;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 

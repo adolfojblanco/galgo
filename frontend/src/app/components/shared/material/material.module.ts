@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardActions, MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -50,6 +50,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatChipsModule,
     MatFormFieldModule,
     MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule,
   ],
 })
 export class MaterialModule {}

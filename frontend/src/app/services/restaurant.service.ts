@@ -55,8 +55,9 @@ export class RestaurantService {
     return this.http.put<Restaurant>(`${this.urlEndPoint}/${id}/activate`, id);
   }
 
-
-  restaurantTypes() {
-
+  getMyRestaurant(): Observable<Restaurant> {
+    return this.http.get<Restaurant>(`${this.urlEndPoint}/my-restaurant`);
   }
+
+
 }

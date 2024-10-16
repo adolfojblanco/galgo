@@ -31,7 +31,7 @@ public class SpringSecurityConfig {
     private AuthenticationConfiguration authenticationConfiguration;
 
     @Bean
-    AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -44,16 +44,18 @@ public class SpringSecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET,
-                                "/api/restaurants",
-                                "/api/users",
-                                "/api/address"
+                                "/restaurants/**",
+                                "/users",
+                                "/address",
+                                "/restaurants/active"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST,
                                 "/api/restaurants/**",
                                 "/api/restaurants",
                                 "/api/users",
                                 "/api/address",
-                                "/address/{restaurantId}/add-address"
+                                "/address/{restaurantId}/add-address",
+                                "/users/confirm-account/{token}"
                         ).permitAll()
                         .requestMatchers(HttpMethod.PUT,
                                 "/restaurants/{restaurantId}/activate",
@@ -62,7 +64,16 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,
                                 "/restaurants/types/{id}"
                         ).permitAll()
-                        .anyRequest().permitAll())
+                        .requestMatchers(HttpMethod.GET,
+                                "/restaurants/my-restaurant",
+                                "/categories/active"
+                        ).hasRole("BUSINESS")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/restaurants/{restaurantId}/activate"
+                        ).hasAnyRole("BUSINESS", "ADMIN")
+                        .anyRequest().authenticated()
+                )
+
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtValidationFilter(authenticationManager()))

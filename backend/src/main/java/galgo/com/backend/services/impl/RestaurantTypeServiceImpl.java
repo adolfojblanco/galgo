@@ -67,4 +67,6 @@ public class RestaurantTypeServiceImpl implements IRestaurantTypeService {
         }
         return false;
     }
+
+
 }

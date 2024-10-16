@@ -29,6 +29,7 @@ export class RestaurantDetailsComponent implements OnInit {
     restaurantName: '',
     mobilePhone: '',
     localPhone: '',
+    enabled: false,
   };
 
 

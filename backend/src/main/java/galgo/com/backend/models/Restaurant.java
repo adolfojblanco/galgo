@@ -36,18 +36,17 @@ public class Restaurant {
     private RestaurantType restaurantType;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
     private Boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant")
     private List<Product> products;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Category> categories;
 
 
 }

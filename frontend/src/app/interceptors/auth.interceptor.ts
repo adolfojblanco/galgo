@@ -1,4 +1,4 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -12,28 +12,31 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authServices = inject(AuthService);
 
   const token: string | null = authServices.getToken();
-  let request = req;
-  if (token != undefined) {
+
+  if (token) {
     const authReq = req.clone({
-      setHeaders: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
+      headers: req.headers.set('Authorization', `Bearer ${token}`)
     });
-  }
 
-  return next(req).pipe(
-    catchError((err: any) => {
-      if (err.status === 401) {
-        return throwError(() => {
-          localStorage.removeItem('token');
-          toast.error(`Ocurrio un error desconocido, intentalo más tarde`)
-        });
-      }
+    return next(authReq).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status == 401) {
+          console.log("401", err)
+          return throwError(() => {
+            localStorage.removeItem('token');
+            router.navigate(['(auth/login)'])
+            toast.info('Debes volver a loguarte');
+            toast.error(`${err.error.message}: ${err.error.error}`);
+          })
+        }
 
-      if (err.status === 403) {
+        if (err.status === 403) {
+          toast.error("No estas autorizado")
+        }
 
-      }
+        if (err.status === 400) {
+          toast.error("ERROR 400")
+        }
 
       if (err.status === 500) {
         if (err.error.error.includes("Duplicate entry")) {
@@ -46,13 +49,34 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }
       }
 
+        return throwError(() => {
+          toast.error("ERROR")
+        });
+      })
+    );
+  }
+  return next(req).pipe(
+    catchError((err: HttpErrorResponse) => {
+      if (err.status == 401) {
+        return throwError(() => {
+          localStorage.removeItem('token');
+          router.navigate(['(auth/login)'])
+          toast.error(`${err.error.message}`);
+        })
+      }
 
+      if (err.status === 403) {
+        router.navigate(['(auth/login)'])
+        toast.error("ERROR 403")
+      }
+
+      if (err.status === 400) {
+        toast.error("ERROR 400")
+      }
 
       return throwError(() => {
-        if (err.message.includes('0 Unknown Error')) {
-          toast.error(`Ocurrio un error desconocido, intentalo más tarde`)
-        }
+        toast.error("ERROR")
       });
-    }
-    ))
+    })
+  );
 }

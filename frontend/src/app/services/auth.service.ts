@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class AuthService {
 
   /** Confirm and activate account */
   confirmAccount(token: string, username: string): Observable<any> {
-    return this.http.post<any>(`${this.urlEndPoint}/login`, username);
+    console.log(this.urlEndPoint)
+    return this.http.post<any>(`${this.urlEndPoint}/users/confirm-account/${token}`, username);
   }
 
   /** Load token from localstorage */
@@ -41,4 +43,29 @@ export class AuthService {
     localStorage.clear();
     return null;
   }
+
+  /** return login user */
+  getAuthUser() {
+    const token = this.getToken();
+    const decoded: any = jwtDecode(token);
+    return decoded;
+  }
+
+  /** Check the user rol */
+  hasRoles(role: string): boolean {
+    const token = this.getToken();
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      if (decoded.authorities.includes(role)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+    /** Clean local storage and redirect */
+    logout() {
+      localStorage.clear();
+      this.router.navigate(['/auth/login']);
+    }
 }

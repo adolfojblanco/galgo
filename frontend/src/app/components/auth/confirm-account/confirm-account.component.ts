@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 
 @Component({
@@ -12,13 +14,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ConfirmAccountComponent {
   private authService = inject(AuthService);
   private route = inject(ActivatedRoute)
-  private router = inject(ActivatedRoute)
+  private router = inject(Router)
   private fb = inject(FormBuilder)
+  private toast = inject(HotToastService);
 
-  private username: string = ''
+  private token:  string | null = '';
+
 
   confirmForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
+    username: ['alexblanco', [Validators.required]],
     password: ['', [Validators.required]],
   })
 
@@ -28,16 +32,26 @@ export class ConfirmAccountComponent {
 
   getToken(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const token2 = this.route.snapshot.paramMap.get('token')
-      const token: any = params.get('token');
-      console.log(token2);
-      // this.authService
-      //   .confirmAccount(token, this.username)
-      //   .subscribe();
+      this.token = params.get('token');
     });
   }
 
   submit() {
+    console.log(this.confirmForm.value)
+    this.authService.confirmAccount(this.token!, this.confirmForm.value).subscribe((res) => {
+      if (res !== null) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Tu cuenta se activo correctamente",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.router.navigate(['/auth/login'])
+      }else{
+        this.toast.error("Hay un error en los datos, confirmalos y vuelve a intentarlo")
+      }
+    })
 
   }
 

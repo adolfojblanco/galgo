@@ -1,0 +1,47 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }">
+    <mat-toolbar>
+      <span>Menú</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let item of sidebarItems"
+        [routerLink]="item.url"
+        (click)="sidenav.toggle()"
+        routerLinkActive="selected"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </mat-list-item>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <mat-list-item
+        [routerLink]="'/admin/users/profile'"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon matListItemIcon>settings</mat-icon>
+        Ajustes
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary" style="position: fixed; z-index: 999">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer">GALGO | Restaurante</span>
+    <span> alexblanco </span>
+    <button mat-button (click)="logout()">Salir</button>
+  </mat-toolbar>
+
+  <div class="container" style="margin-top: 80px">
+    <router-outlet />
+  </div>
+</mat-sidenav-container>
+

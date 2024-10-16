@@ -7,7 +7,8 @@ export interface Restaurant {
   restaurantName: string;
   mobilePhone: string;
   localPhone: string;
-  address?: Address
-  user?: User
+  address?: Address;
+  user?: User;
+  enabled: boolean;
   restaurantType?: RestaurantType;
 }

@@ -1,0 +1,77 @@
+<h2 mat-dialog-title>{{ titleForm }}:</h2>
+
+<mat-divider></mat-divider>
+
+<div class="col-12">
+  <mat-dialog-content class="mat-typography">
+    <form autocomplete="off" class="row" [formGroup]="productForm">
+      <!-- restaurant category -->
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Nombre del Producto:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Nombre del producto"
+            formControlName="productName"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('productName')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Tipo de Comida</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let cat of categories" [value]="cat">
+              {{ cat.categoryName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Precio:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Precio del producto"
+            formControlName="price"
+            class="full-width"
+            required
+          />
+          <mat-hint *ngIf="isValid('price')">
+            El campo es requerido <strong>Requerido</strong>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+      <mat-form-field>
+        <mat-label>Descripción:</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <p>
+        <mat-slide-toggle formControlName="enabled">Activo</mat-slide-toggle>
+      </p>
+    </form>
+    <mat-divider></mat-divider>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="productForm.invalid"
+      (click)="submit()"
+    >
+      {{ textButton }}
+    </button>
+  </mat-dialog-actions>
+</div>
+

@@ -1,14 +1,13 @@
 package galgo.com.backend.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class User {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})}
     )
     private List<Role> roles;
+
 
     public User() {
         this.roles = new ArrayList<>();

@@ -36,8 +36,8 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer">GALGO ADMIN</span>
-    <span> AdolfoB </span>
-    <button mat-button>Salir</button>
+    <span> {{ user.username }} </span>
+    <button mat-button (click)="logout()">Salir</button>
   </mat-toolbar>
 
   <div class="container" style="margin-top: 80px">

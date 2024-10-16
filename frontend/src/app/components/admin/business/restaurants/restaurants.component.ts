@@ -41,6 +41,7 @@ export class RestaurantsComponent implements OnInit {
       width: '650px',
     })
     dialogRef.afterClosed().subscribe((res) => {
+      console.log(res)
       if (res) {
         this.loadRestaurants()
       }

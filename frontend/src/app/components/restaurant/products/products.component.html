@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-between animate__animated animate__fadeIn">
+  <h1>
+    Mis Productos:
+    <span *ngIf="products" class="badge badge-light">{{
+      products.length
+    }}</span>
+  </h1>
+
+  <div class="d-flex">
+    <!-- buttons -->
+    <button
+      mat-raised-button
+      color="primary"
+      class="mx-2"
+      (click)="newProduct()"
+    >
+      Producto<mat-icon>add_circle</mat-icon>
+    </button>
+    <!-- end buttons -->
+  </div>
+</div>
+
+<mat-divider class="mb-3"></mat-divider>
+
+<mat-card class="mx-auto animate__animated animate__fadeIn">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef><strong>Id. </strong></th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          <strong>Producto:</strong>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>
+          <strong>Precio:</strong>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      </ng-container>
+
+      <!-- Active Column -->
+      <ng-container matColumnDef="enabled">
+        <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
+          <strong>Activo</strong>
+        </th>
+        <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+          <mat-icon *ngIf="element.enabled" class="text-success">done</mat-icon>
+          <mat-icon *ngIf="!element.enabled" class="text-danger"
+            >block</mat-icon
+          >
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-center">
+          <strong>Acciones</strong>
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <a
+            mat-raised-button
+            color="primary"
+            >Detalle<mat-icon>info</mat-icon></a
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-divider class="m-2"></mat-divider>
+    <mat-paginator
+      showFirstLastButtons
+      mat-dialog-close="restaurant"
+      aria-label="Select page of periodic elements"
+      class="mt-3"
+    >
+    </mat-paginator>
+  </div>
+</mat-card>

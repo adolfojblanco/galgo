@@ -14,7 +14,7 @@ export class RestaurantsService {
 
 
   getAllRestaurants(): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.urlEndPoint}`);
+    return this.http.get<Restaurant[]>(`${this.urlEndPoint}/active`);
   }
 }
 

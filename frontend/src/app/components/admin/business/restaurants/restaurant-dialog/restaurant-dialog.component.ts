@@ -60,13 +60,11 @@ export class RestaurantDialogComponent implements OnInit {
     } else {
       // Create a restaurant
       this.restaurantService.createRestaurant(this.restaurantForm.value).pipe(
-        this.toast.observe(
-          {
-            loading: 'Guardando...',
-            success: (s) => 'Guardado correctamente',
-          }
-        ),
-        catchError((error) => of(error))
+        this.toast.observe({
+          loading: 'Guardando...',
+          success: '🚀 Registro guardado',
+          error: '😡 Hubo un error al guardar'
+       })
       ).subscribe((res) => {
         this.dialogRef.close(res);
       });

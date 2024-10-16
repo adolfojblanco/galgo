@@ -1,7 +1,9 @@
 package galgo.com.backend.services;
 
+import galgo.com.backend.dto.UserDTO;
 import galgo.com.backend.models.Restaurant;
 import galgo.com.backend.models.User;
+import galgo.com.backend.request.ConfirmAccountRequest;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -9,13 +11,15 @@ import java.util.Optional;
 
 public interface IUserService {
 
-    public List<User> findAll();
+    List<UserDTO> findAll();
 
-    public Optional<User> findById(Long id);
+    Optional<UserDTO> findById(Long id);
 
-    public User save(User user, String role);
+    UserDTO save(User user, String role);
 
-    public Optional<User> update(User user, Long id);
+    Optional<UserDTO> update(User user, Long id);
 
-    public void deleteById(Long id);
+    Optional<UserDTO> confirmAccount(String token, ConfirmAccountRequest request);
+
+    void deleteById(Long id);
 }

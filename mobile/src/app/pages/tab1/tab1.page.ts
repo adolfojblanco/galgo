@@ -1,8 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core'
+import { RestaurantsService } from '../../services/restaurants.service';
+import { Restaurant } from '../../models/restaurant';
 import { register } from 'swiper/element/bundle';
-import { RestaurantsService } from '../services/restaurants.service';
-import { Restaurant } from '../models/restaurant';
-register()
+
+register();
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -22,8 +24,8 @@ export class Tab1Page implements OnInit {
 
 
   loadRestaurants() {
-    this.restaurantsService.getAllRestaurants().subscribe((res) => {
-      this.restaurants = res;
+    this.restaurantsService.getAllRestaurants().subscribe((res:any) => {
+      this.restaurants = res.data;
     })
   }
 

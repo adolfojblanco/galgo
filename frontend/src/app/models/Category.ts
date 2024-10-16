@@ -1,1 +1,5 @@
-export interface Category { }
+export interface Category {
+  categoryId?: Number
+  categoryName: string,
+  enabled: boolean
+}
