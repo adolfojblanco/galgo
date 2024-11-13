@@ -64,6 +64,9 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,
                                 "/restaurants/types/{id}"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.POST,
+                                "/products/{restaurantId}/new-product"
+                        ).hasRole("BUSINESS")
                         .requestMatchers(HttpMethod.GET,
                                 "/restaurants/my-restaurant",
                                 "/categories/active"

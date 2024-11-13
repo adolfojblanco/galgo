@@ -32,7 +32,7 @@ public class UserController {
         Optional<UserDTO> userOptional = userService.update(user, id);
         if (userOptional.isPresent()) {
             ApiResponse response = new ApiResponse();
-            response.setCode(200L);
+            response.setCode(200);
             response.setData(userOptional);
             return ResponseEntity.ok(response);
         }

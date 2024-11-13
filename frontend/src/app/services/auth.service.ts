@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   /** return login user */
-  getAuthUser() {
+  getAuthUser(): User {
     const token = this.getToken();
     const decoded: any = jwtDecode(token);
     return decoded;
@@ -63,9 +63,19 @@ export class AuthService {
     return false;
   }
 
-    /** Clean local storage and redirect */
-    logout() {
-      localStorage.clear();
-      this.router.navigate(['/auth/login']);
+  /** Get username from logged user  */
+  getAuthUserName(): string | undefined {
+    const user = this.getAuthUser();
+    if (user) {
+      return user.username
     }
+    this.logout();
+    return;
+  }
+
+  /** Clean local storage and redirect */
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
+  }
 }

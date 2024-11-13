@@ -34,9 +34,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
-
 
 }

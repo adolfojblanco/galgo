@@ -25,4 +25,8 @@ public class Category {
     @NotBlank
     private Boolean enabled;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
 }

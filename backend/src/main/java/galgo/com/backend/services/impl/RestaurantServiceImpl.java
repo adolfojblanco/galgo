@@ -73,7 +73,6 @@ public class RestaurantServiceImpl implements IRestaurantService {
         User userDb = userRepository.save(user);
 
         RestaurantType restaurantType = restaurantTypeRepository.findById(request.getRestaurantType().getId()).orElseThrow();
-
         Restaurant rest = new Restaurant();
         rest.setRestaurantName(request.getRestaurantName());
         rest.setLocalPhone(request.getLocalPhone());

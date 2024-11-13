@@ -42,7 +42,7 @@ public class AddressServiceImpl implements IAddressService {
         addressNew.setCountry(address.getCountry());
         addressNew.setLatitude(address.getLatitude());
         addressNew.setLongitude(address.getLongitude());
-        addressNew.setActive(true);
+        addressNew.setEnabled(true);
         return addressRepository.save(addressNew);
     }
 
@@ -86,7 +86,7 @@ public class AddressServiceImpl implements IAddressService {
             addressNew.setCountry(address.getCountry());
             addressNew.setLatitude(address.getLatitude());
             addressNew.setLongitude(address.getLongitude());
-            addressNew.setActive(true);
+            addressNew.setEnabled(true);
 
             addressNew = this.addressRepository.save(addressNew);
             rest.setAddress(addressNew);
@@ -100,7 +100,7 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public Address disableOneById(Long addressId) {
         Address address = addressRepository.findById(addressId).orElseThrow();
-        address.setActive(!address.getActive());
+        address.setEnabled(!address.getEnabled());
         return address;
     }
 }

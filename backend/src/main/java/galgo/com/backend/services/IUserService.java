@@ -13,6 +13,8 @@ public interface IUserService {
 
     List<UserDTO> findAll();
 
+    Optional<UserDTO> findByUsername(String username);
+
     Optional<UserDTO> findById(Long id);
 
     UserDTO save(User user, String role);

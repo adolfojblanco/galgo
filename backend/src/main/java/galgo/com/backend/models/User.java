@@ -55,7 +55,6 @@ public class User {
     )
     private List<Role> roles;
 
-
     public User() {
         this.roles = new ArrayList<>();
     }

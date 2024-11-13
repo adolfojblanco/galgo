@@ -19,7 +19,6 @@ export class DesktopComponent implements OnInit {
 
   loadMyRestaurant() {
     this.restService.getMyRestaurant().subscribe((res:any) => {
-      console.log(res.data)
       this.restaurant = res.data;
     });
   }

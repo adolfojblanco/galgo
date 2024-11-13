@@ -38,5 +38,5 @@ public class Address {
 
     private String longitude;
 
-    private Boolean active;
+    private Boolean enabled;
 }

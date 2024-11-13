@@ -1,18 +1,19 @@
 package galgo.com.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Restaurant {
 
@@ -45,8 +46,12 @@ public class Restaurant {
 
     private Boolean enabled;
 
-    @OneToMany(mappedBy = "restaurant")
+    @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"}) // garbage fields
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;
 
+    public Restaurant() {
+        this.products = new ArrayList<>();
+    }
 
 }

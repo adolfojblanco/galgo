@@ -65,7 +65,7 @@ public class CategoryController {
     public ResponseEntity<ApiResponse> enabledCategory(@PathVariable Long categoryId) {
         CategoryDTO categoryDTO = categoryService.enabledCategory(categoryId);
         ApiResponse response = new ApiResponse();
-        response.setCode(201L);
+        response.setCode(201);
         response.setMessage( categoryDTO.getCategoryName() + " Actualizada correctamente");
         response.setData(categoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

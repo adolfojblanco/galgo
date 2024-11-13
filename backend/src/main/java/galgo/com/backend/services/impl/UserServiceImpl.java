@@ -68,6 +68,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         return UserMapper.INSTANCE.usersToUsersDTO(users);
     }
 
+    @Override
+    public Optional<UserDTO> findByUsername(String username) {
+        return Optional.empty();
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Optional<UserDTO> findById(Long id) {

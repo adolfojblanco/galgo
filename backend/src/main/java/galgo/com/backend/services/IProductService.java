@@ -1,8 +1,7 @@
 package galgo.com.backend.services;
 
 import galgo.com.backend.dto.ProductDTO;
-
-import javax.swing.text.html.Option;
+import galgo.com.backend.dto.RestaurantDTO;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +12,11 @@ public interface IProductService {
 
     Optional<ProductDTO> findById(Long id);
 
-    ProductDTO save(String username, ProductDTO productDTO);
+    ProductDTO save(RestaurantDTO restaurantDTO, ProductDTO productDTO);
 
     Optional<ProductDTO> updateById(Long id);
 
     ProductDTO enabledProduct(Long id);
+
 
 }

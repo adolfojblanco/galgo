@@ -47,7 +47,7 @@ public class RestaurantController {
         RestaurantDTO restaurant = restaurantService.findByUsername(auth.getName()).orElseThrow();
         ApiResponse response = new ApiResponse();
         response.setData(restaurant);
-        response.setCode(200L);
+        response.setCode(200);
         return ResponseEntity.ok(response);
     }
 
@@ -72,7 +72,7 @@ public class RestaurantController {
             if (restaurant.get().getAddress() != null) {
                 ApiResponse response = new ApiResponse();
                 response.setData(restaurant);
-                response.setCode(200L);
+                response.setCode(200);
                 restaurantService.disableOneById(restaurantId);
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             }

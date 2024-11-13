@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponse {
-    private Long code;
+    private Integer code;
     private String message;
     private Object data;
 
