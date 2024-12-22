@@ -90,6 +90,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, String> body = new HashMap<>();
         body.put("token", jwt);
         body.put("username", username);
+        body.put("refresh_token", "refresh");
         body.put("message", String.format("Hola, %s", username));
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));

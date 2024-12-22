@@ -69,8 +69,8 @@ public class GlobalExceptionHandler {
         String failedField = cause.getConstraintName();
         Map<String, Object> response = new HashMap<>();
         response.put("message", DATABASE_QUERY_ERROR);
-        response.put("error", "El campo " + failedField + exception.getMostSpecificCause().getMessage());
-        log.info(failedField + "-----------------DataIntegrityViolationException");
+        response.put("error", "El campo " + failedField + cause);
+        log.info("-----------------DataIntegrityViolationException");
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

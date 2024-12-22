@@ -45,6 +45,7 @@ public class CategoryServiceImpl implements ICategoryService {
     public CategoryDTO save(CategoryDTO categoryDTO) {
         Category category = CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDTO);
         Category newCategory = categoryRepository.save(category);
+
         return CategoryMapper.INSTANCE.categoryToCategoryDTO(newCategory);
     }
 

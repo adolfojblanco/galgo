@@ -6,16 +6,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "restaurant_types")
+@Table(name = "restaurant_types", uniqueConstraints = {@UniqueConstraint(name = "name", columnNames = {"name"})})
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class RestaurantType {
+public class RestaurantType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
